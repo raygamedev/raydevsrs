@@ -38,7 +38,7 @@ function App() {
           phone={'+972-526865438'}
           email={'dan@raydevs.com'}
         />
-        <GameButton />
+        {/* <GameButton /> */}
       </Flex>
       <Summary />
       <Resume />
