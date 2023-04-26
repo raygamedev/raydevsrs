@@ -1,18 +1,10 @@
-import {
-  Flex,
-  Grid,
-  createStyles,
-  SegmentedControl,
-  SegmentedControlItem,
-} from '@mantine/core';
-import { ResumeCard, ResumeCardProps } from './ResumeCard';
-import styled from '@emotion/styled';
+import { Flex, createStyles, SegmentedControlItem } from '@mantine/core';
 import { SegmentControl } from './SegmentControl';
 import { SegmentItem } from './SegmentItem';
 import InspektoLogo from '../../art/InspektoLogo.png';
 import { useState } from 'react';
 import { ResumeCardType } from './enums';
-import { ResumeData, ResumeKeys, SegmentItemData } from './types';
+import { ResumeData, ResumeKeys } from './types';
 import { SegmentDescription } from './SegmentDescription';
 
 const useStyles = createStyles((theme) => ({
@@ -43,20 +35,25 @@ const resumeData: ResumeData = {
     },
     segmentDescription: [
       {
-        badge: ['Python', 'React'],
-        text: 'aio lol',
+        badge: ['React', 'TypeScript', 'Python', 'Flask', 'FastAPI', 'MongoDB'],
+        text: [
+          'Full-stack development using Python, React, TypeScript, MongoDB resulting in a highly responsive and user-friendly application.',
+          'Full responsibility for features, from design, development, testing to deployment for both frontend and backend.',
+        ],
       },
       {
         badge: ['Docker', 'Gitlab CI/CD'],
-        text: 'aio lol',
+        text: 'Implemented DevOps CI/CD practices on Linux, Docker, GitlabCI',
       },
       {
-        badge: 'Ansible',
-        text: 'aio lol',
-      },
-      {
-        badge: ['Linux', 'Bash', 'Preseed'],
-        text: 'aio lol',
+        badge: ['Ansible', 'Python', 'Bash', 'Preseed', 'Linux'],
+        text: [
+          'Responsible for the deployment of the product on Linux on-prem machines, including deciding on tools and designing the deployment process.',
+          'Created a new deployment process for our product from scratch using Ansible, Python, Bash, and Preseed for automating boot installtion.',
+          'Streamlined the deployment pipeline by implementing automated scripts and configuration management tools.',
+          'Created a new deployment process for our dev machines using Ansible, Python, Bash, and Preseed for automating installtion.',
+          'Significantly reduced deployment times and human errors for both dev and prod environments.',
+        ],
       },
     ],
   },
@@ -85,7 +82,10 @@ const resumeData: ResumeData = {
       },
       {
         badge: 'Misc',
-        text: 'Responsible for deciding on infastructure and tools for automation',
+        text: [
+          'Responsible for deciding on infastructure and tools for automation',
+          "During this period I've studied and learned about automation, CI/CD, DevOps, and Software Development in my free time and I've been able to apply this knowledge to my work",
+        ],
       },
     ],
   },

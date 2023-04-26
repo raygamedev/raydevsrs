@@ -4,8 +4,6 @@ import {
   SegmentedControlItem,
 } from '@mantine/core';
 import { Colors } from '../../styles/colors';
-import { SegmentItem } from './SegmentItem';
-import InspektoLogo from '../../art/InspektoLogo.png';
 import { ResumeCardType } from './enums';
 
 const useStyles = createStyles((theme) => ({
