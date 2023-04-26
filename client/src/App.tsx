@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { Resume } from './components/Resume/Resume';
 import { Profile } from './components/Profile/Profile';
 import { SegmentControl } from './components/SegmentControl/SegmentControl';
+import Summary from './components/Summary/Summary';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         phone={'+972-526865438'}
         email={'dan@raydevs.com'}
       />
+      <Summary />
       <Resume />
     </Flex>
   );

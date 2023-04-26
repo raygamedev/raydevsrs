@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createStyles, Header, Container, Group, Burger, Paper, Transition, rem } from '@mantine/core';
+import { Text, createStyles, Header, Container, Group, Burger, Paper, Transition, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantine/ds';
 
@@ -100,9 +100,9 @@ export function TopBar({ links }: HeaderResponsiveProps) {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} mb={120} className={classes.root}>
+    <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
-        <MantineLogo size={28} />
+        <Text>Raydevs</Text>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
