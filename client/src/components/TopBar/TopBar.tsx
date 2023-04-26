@@ -43,7 +43,7 @@ export function TopBar() {
       <Container className={classes.header}>
         <Text className={classes.title}>Raydevs</Text>
         <Group>
-          <Button
+          {/* <Button
             component="a"
             target="_blank"
             rel="noopener noreferrer"
@@ -51,7 +51,7 @@ export function TopBar() {
             color="violet"
             leftIcon={<IconFileDescription size={rem(20)} />}>
             CV
-          </Button>
+          </Button> */}
           <Button
             component="a"
             target="_blank"
