@@ -1,24 +1,13 @@
 version: "3"
 services:
-  backend:
+  client:
     platform: linux/amd64
     build:
-      context: backend
+      context: client
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
-    image: ghcr.io/raygamedev/raydevs:backend
-    command: python /app/app.py
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
-  client:
-    build:
-      context: client
-      dockerfile: ./Dockerfile
-    ports:
       - "3000:3000"
-    image: ghcr.io/raygamedev/raydevs:client
+    image: ghcr.io/raygamedev/raydevsrs:client
     command: serve -s -l 3000 build
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
