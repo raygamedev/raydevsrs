@@ -14,7 +14,8 @@
 				"ms-vscode.vscode-typescript-next",
 				"GitHub.copilot",
 				"rust-lang.rust-analyzer",
-				"dsznajder.es7-react-js-snippets"
+				"dsznajder.es7-react-js-snippets",
+				"burkeholland.simple-react-snippets"
 			]
 		}
 	}

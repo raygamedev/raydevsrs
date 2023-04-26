@@ -8,7 +8,7 @@ interface Props {
 export const ActionButton = ({ text, variant, onClick }: Props) => {
   return (
     <div>
-      <Button variant={variant} onClick={onClick}>
+      <Button color="violet" variant={variant} onClick={onClick}>
         {text}
       </Button>
     </div>
