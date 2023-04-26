@@ -1,29 +1,40 @@
-import { MantineProvider, Button, Group, Flex } from '@mantine/core';
+import { MantineProvider, Flex, Group, createStyles } from '@mantine/core';
 import './App.css';
 import { TopBar } from './components/TopBar/TopBar';
-import styled from '@emotion/styled';
 import { Resume } from './components/Resume/Resume';
 import { Profile } from './components/Profile/Profile';
-import { SegmentControl } from './components/SegmentControl/SegmentControl';
 import Summary from './components/Summary/Summary';
+import GameButton from './components/GameButton/GameButton';
+import ProfilePicture from './art/profiePicture.png';
+const useStyles = createStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 20,
+  },
+  profileGame: {
+    width: '80%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+}));
 
 function App() {
+  const { classes } = useStyles();
   return (
-    <Flex direction="column" align="center" gap="md">
-      <TopBar
-        links={[
-          { link: 'cv', label: 'CV' },
-          { link: 'github', label: 'GitHub' },
-          { link: 'linkedin', label: 'LinkedIn' },
-        ]}
-      />
-      <Profile
-        avatar={''}
-        name={'Dan Raymond'}
-        title={'Fullstack Software Developer'}
-        phone={'+972-526865438'}
-        email={'dan@raydevs.com'}
-      />
+    <Flex className={classes.root}>
+      <TopBar />
+      <Flex className={classes.profileGame}>
+        <Profile
+          avatar={ProfilePicture}
+          name={'Dan Raymond'}
+          title={'Fullstack Software Developer'}
+          phone={'+972-526865438'}
+          email={'dan@raydevs.com'}
+        />
+        <GameButton />
+      </Flex>
       <Summary />
       <Resume />
     </Flex>
@@ -41,8 +52,7 @@ function RayDevs() {
         },
         colorScheme: 'dark',
         fontFamily: 'JetbrainsMonoLight',
-      }}
-    >
+      }}>
       <App />
     </MantineProvider>
   );

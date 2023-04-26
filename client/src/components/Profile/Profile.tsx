@@ -6,7 +6,10 @@ const useStyles = createStyles((theme) => ({
     width: '80%',
   },
   icon: {
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
+    color:
+      theme.colorScheme === 'dark'
+        ? theme.colors.dark[3]
+        : theme.colors.gray[5],
   },
 
   name: {
@@ -25,7 +28,7 @@ interface ProfileProps {
 export function Profile({ avatar, name, title, phone, email }: ProfileProps) {
   const { classes } = useStyles();
   return (
-    <Group className={classes.root} noWrap>
+    <Group noWrap>
       <Avatar src={avatar} size={200} radius="md" />
       <div>
         <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
