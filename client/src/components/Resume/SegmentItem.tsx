@@ -1,9 +1,10 @@
-import { createStyles, Card, Image, Avatar, Text, Group } from '@mantine/core';
+import { createStyles, Card, Avatar, Text, Group } from '@mantine/core';
 import { Colors } from '../../styles/colors';
 
 const useStyles = createStyles((theme) => ({
   root: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor:
+      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     borderRadius: 30,
   },
 
@@ -30,7 +31,12 @@ interface SegmentItemProps {
   };
 }
 
-export function SegmentItem({ title, startDate, endDate, company }: SegmentItemProps) {
+export function SegmentItem({
+  title,
+  startDate,
+  endDate,
+  company,
+}: SegmentItemProps) {
   const { classes } = useStyles();
   return (
     <Card withBorder radius="md" p={0} className={classes.root}>

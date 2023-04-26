@@ -1,4 +1,4 @@
-import { MantineProvider, Flex, Group, createStyles } from '@mantine/core';
+import { MantineProvider, Flex, createStyles } from '@mantine/core';
 import './App.css';
 import { TopBar } from './components/TopBar/TopBar';
 import { Resume } from './components/Resume/Resume';
@@ -6,7 +6,7 @@ import { Profile } from './components/Profile/Profile';
 import Summary from './components/Summary/Summary';
 import GameButton from './components/GameButton/GameButton';
 import ProfilePicture from './art/profiePicture.png';
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
