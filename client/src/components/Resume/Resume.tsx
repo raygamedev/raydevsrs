@@ -1,4 +1,10 @@
-import { Flex, Grid, createStyles, SegmentedControlItem } from '@mantine/core';
+import {
+  Flex,
+  Grid,
+  createStyles,
+  SegmentedControl,
+  SegmentedControlItem,
+} from '@mantine/core';
 import { ResumeCard, ResumeCardProps } from './ResumeCard';
 import styled from '@emotion/styled';
 import { SegmentControl } from './SegmentControl';
@@ -6,6 +12,8 @@ import { SegmentItem } from './SegmentItem';
 import InspektoLogo from '../../art/InspektoLogo.png';
 import { useState } from 'react';
 import { ResumeCardType } from './enums';
+import { ResumeData, ResumeKeys, SegmentItemData } from './types';
+import { SegmentDescription } from './SegmentDescription';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -21,16 +29,98 @@ const useStyles = createStyles((theme) => ({
     }`,
   },
 }));
-type ResumeData = {
-  [key in ResumeCardType]: ResumeCardProps[];
-};
+
 const resumeData: ResumeData = {
-  [ResumeCardType.SoftwareDeveloper]: [
-    { badge: ['Python', 'React'], text: 'test' },
-    { badge: 'Python', text: 'test' },
-  ],
-  [ResumeCardType.QaAutomation]: [],
-  [ResumeCardType.DataTeamMember]: [],
+  [ResumeKeys.SoftwareDeveloper]: {
+    segmentItem: {
+      title: 'Software Developer',
+      startDate: 'April 2020',
+      endDate: 'Current',
+      company: {
+        name: 'Inspekto',
+        avatar: InspektoLogo,
+      },
+    },
+    segmentDescription: [
+      {
+        badge: ['Python', 'React'],
+        text: 'aio lol',
+      },
+      {
+        badge: ['Docker', 'Gitlab CI/CD'],
+        text: 'aio lol',
+      },
+      {
+        badge: 'Ansible',
+        text: 'aio lol',
+      },
+      {
+        badge: ['Linux', 'Bash', 'Preseed'],
+        text: 'aio lol',
+      },
+    ],
+  },
+  [ResumeKeys.QaAutomation]: {
+    segmentItem: {
+      title: 'QA Automation',
+      startDate: 'April 2019',
+      endDate: 'April 2020',
+      company: {
+        name: 'Inspekto',
+        avatar: InspektoLogo,
+      },
+    },
+    segmentDescription: [
+      {
+        badge: ['Node.JS', 'Puppeteer'],
+        text: 'Development UI Automation using NodeJS and Puppeteer',
+      },
+      {
+        badge: 'python',
+        text: 'Development of Automation framework using Python from scratch',
+      },
+      {
+        badge: ['Jenkins', 'Python'],
+        text: 'Development of CI/CD pipeline using Jenkins and Python',
+      },
+      {
+        badge: 'Misc',
+        text: 'Responsible for deciding on infastructure and tools for automation',
+      },
+    ],
+  },
+  [ResumeKeys.DataTeamMember]: {
+    segmentItem: {
+      title: 'Data Team Member',
+      startDate: 'May 2018',
+      endDate: 'April 2019',
+      company: {
+        name: 'Inspekto',
+        avatar: InspektoLogo,
+      },
+    },
+    segmentDescription: [
+      {
+        badge: 'Python',
+        text: [
+          'Developed automated tools to improve efficiency and accuracy in data analysis processes.',
+          'Conducted data analysis for the Algorithm team, creating visualizations and analyzing data using heatmaps, CSV files, and basic Python scripting.',
+        ],
+      },
+      {
+        badge: 'Git',
+        text: [
+          'Learned Git fundamentals, enabling a better understanding of the development environment, and for testing ML models.',
+        ],
+      },
+      {
+        badge: 'Linux',
+        text: [
+          'Acquired Linux fundamentals, enabling a better understanding of the development environment',
+        ],
+      },
+    ],
+  },
 };
 
 export const Resume = () => {
@@ -39,40 +129,33 @@ export const Resume = () => {
     ResumeCardType.SoftwareDeveloper,
   );
 
-  const SegmentItems: SegmentedControlItem[] = [
-    {
-      label: SegmentItem({
-        title: 'Software Developer',
-        startDate: 'Apr 2020',
-        endDate: 'Current',
-        company: { name: 'Inspekto', avatar: InspektoLogo },
-      }),
-      value: ResumeCardType.SoftwareDeveloper,
-    },
-    {
-      label: SegmentItem({
-        title: 'QA Automation',
-        startDate: 'Apr 2019',
-        endDate: 'Apr 2020',
-        company: { name: 'Inspekto', avatar: InspektoLogo },
-      }),
-      value: ResumeCardType.QaAutomation,
-    },
-    {
-      label: SegmentItem({
-        title: 'Data Team Member',
-        startDate: 'May 2018',
-        endDate: 'Apr 2019',
-        company: { name: 'Inspekto', avatar: InspektoLogo },
-      }),
-      value: ResumeCardType.DataTeamMember,
-    },
-  ];
+  const extractSegmentItems = (
+    resumeData: ResumeData,
+  ): SegmentedControlItem[] => {
+    const segmentedItems: SegmentedControlItem[] = [];
+    for (const key in resumeData) {
+      const segment: SegmentedControlItem = {
+        label: (
+          <SegmentItem
+            segmentData={resumeData[key as ResumeCardType].segmentItem}
+          />
+        ),
+        value: key as ResumeCardType,
+      };
+      segmentedItems.push(segment);
+    }
+    return segmentedItems;
+  };
 
   return (
     <Flex className={classes.root}>
-      <SegmentControl setActive={setActive} segmentItems={SegmentItems} />
-      <ResumeCard data={resumeData[active]} />
+      <SegmentControl
+        setActive={setActive}
+        segmentItems={extractSegmentItems(resumeData)}
+      />
+      <SegmentDescription
+        segmentDescriptionList={resumeData[active].segmentDescription}
+      />
     </Flex>
   );
 };

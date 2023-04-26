@@ -1,5 +1,6 @@
 import { createStyles, Card, Avatar, Text, Group } from '@mantine/core';
 import { Colors } from '../../styles/colors';
+import { SegmentItemData } from './types';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -22,22 +23,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface SegmentItemProps {
-  title: string;
-  startDate: string;
-  endDate: string;
-  company: {
-    name: string;
-    avatar: string;
-  };
+  segmentData: SegmentItemData;
 }
 
-export function SegmentItem({
-  title,
-  startDate,
-  endDate,
-  company,
-}: SegmentItemProps) {
+export function SegmentItem({ segmentData }: SegmentItemProps) {
   const { classes } = useStyles();
+  const { title, startDate, endDate, company } = segmentData;
   return (
     <Card withBorder radius="md" p={0} className={classes.root}>
       <Group noWrap spacing={0}>
