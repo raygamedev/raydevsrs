@@ -1,4 +1,4 @@
-import { MantineProvider, Flex, createStyles } from '@mantine/core';
+import { MantineProvider, Flex, createStyles, Group } from '@mantine/core';
 import './App.css';
 import { TopBar } from './components/TopBar/TopBar';
 import { Resume } from './components/Resume/Resume';
@@ -17,6 +17,11 @@ const useStyles = createStyles(() => ({
     width: '80%',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  summaryContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '80%',
   },
 }));
 
