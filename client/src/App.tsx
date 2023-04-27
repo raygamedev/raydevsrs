@@ -37,7 +37,7 @@ const App = () => {
         <GameButton />
       </Flex>
       <Summary />
-      <Resume />
+      <Resume isMobile={isMobile} />
     </Flex>
   );
 };

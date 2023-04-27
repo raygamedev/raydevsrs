@@ -11,8 +11,8 @@ export interface SegmentItemData {
 }
 
 export interface SegmentDescriptionData {
-  badge: string | string[];
-  text: string | string[];
+  badge: string[];
+  text: string[];
 }
 
 export enum ResumeKeys {

@@ -1,6 +1,7 @@
 import { createStyles, Card, Avatar, Text, Group } from '@mantine/core';
 import { Colors } from '../../styles/colors';
-import { SegmentItemData } from './types';
+import { SegmentDescriptionData, SegmentItemData } from './types';
+import { SegmentDescription } from './SegmentDescription';
 
 const useStyles = createStyles((theme) => ({
   root: {

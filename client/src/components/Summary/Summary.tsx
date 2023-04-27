@@ -7,7 +7,7 @@ const useStyles = createStyles((theme) => ({
     boxShadow: theme.shadows.md,
     borderRadius: 30,
     padding: 20,
-    justifyContent: 'space-around',
+    width: '95%',
     border: `${theme.spacing.xl} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]
     }`,

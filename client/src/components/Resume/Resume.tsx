@@ -1,11 +1,19 @@
-import { Flex, createStyles, SegmentedControlItem } from '@mantine/core';
+import {
+  Flex,
+  createStyles,
+  SegmentedControlItem,
+  Box,
+  NavLink,
+  Avatar,
+} from '@mantine/core';
 import { SegmentControl } from './SegmentControl';
 import { SegmentItem } from './SegmentItem';
 import InspektoLogo from '../../art/InspektoLogo.png';
 import { useState } from 'react';
 import { ResumeCardType } from './enums';
-import { ResumeData, ResumeKeys } from './types';
+import { ResumeData, ResumeKeys, SegmentItemData } from './types';
 import { SegmentDescription } from './SegmentDescription';
+import { IconGauge, IconFingerprint } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -43,7 +51,7 @@ const resumeData: ResumeData = {
       },
       {
         badge: ['Docker', 'Gitlab CI/CD'],
-        text: 'Implemented DevOps CI/CD practices on Linux, Docker, GitlabCI',
+        text: ['Implemented DevOps CI/CD practices on Linux, Docker, GitlabCI'],
       },
       {
         badge: ['Ansible', 'Python', 'Bash', 'Preseed', 'Linux'],
@@ -70,18 +78,18 @@ const resumeData: ResumeData = {
     segmentDescription: [
       {
         badge: ['Node.JS', 'Puppeteer'],
-        text: 'Development UI Automation using NodeJS and Puppeteer',
+        text: ['Development UI Automation using NodeJS and Puppeteer'],
       },
       {
-        badge: 'python',
-        text: 'Development of Automation framework using Python from scratch',
+        badge: ['python'],
+        text: ['Development of Automation framework using Python from scratch'],
       },
       {
         badge: ['Jenkins', 'Python'],
-        text: 'Development of CI/CD pipeline using Jenkins and Python',
+        text: ['Development of CI/CD pipeline using Jenkins and Python'],
       },
       {
-        badge: 'Misc',
+        badge: ['Misc'],
         text: [
           'Responsible for deciding on infastructure and tools for automation',
           "During this period I've studied and learned about automation, CI/CD, DevOps, and Software Development in my free time and I've been able to apply this knowledge to my work",
@@ -101,20 +109,20 @@ const resumeData: ResumeData = {
     },
     segmentDescription: [
       {
-        badge: 'Python',
+        badge: ['Python'],
         text: [
           'Developed automated tools to improve efficiency and accuracy in data analysis processes.',
           'Conducted data analysis for the Algorithm team, creating visualizations and analyzing data using heatmaps, CSV files, and basic Python scripting.',
         ],
       },
       {
-        badge: 'Git',
+        badge: ['Git'],
         text: [
           'Learned Git fundamentals, enabling a better understanding of the development environment, and for testing ML models.',
         ],
       },
       {
-        badge: 'Linux',
+        badge: ['Linux'],
         text: [
           'Acquired Linux fundamentals, enabling a better understanding of the development environment',
         ],
@@ -122,8 +130,10 @@ const resumeData: ResumeData = {
     ],
   },
 };
-
-export const Resume = () => {
+interface ResumeProps {
+  isMobile: boolean;
+}
+export const Resume = ({ isMobile }: ResumeProps) => {
   const { classes } = useStyles();
   const [active, setActive] = useState<ResumeCardType>(
     ResumeCardType.SoftwareDeveloper,
@@ -147,13 +157,33 @@ export const Resume = () => {
     return segmentedItems;
   };
 
-  return (
+  return isMobile ? (
+    <Box w={'100%'}>
+      {Object.entries(resumeData).map(([key, value]) => {
+        const item = resumeData[key as ResumeCardType].segmentItem;
+        console.log(item);
+        return (
+          <NavLink
+            key={key}
+            label={item.title}
+            icon={<Avatar size="1rem" src={item.company.avatar} />}
+            childrenOffset={28}>
+            <SegmentDescription
+              isMobile={isMobile}
+              segmentDescriptionList={resumeData[active].segmentDescription}
+            />
+          </NavLink>
+        );
+      })}
+    </Box>
+  ) : (
     <Flex className={classes.root}>
       <SegmentControl
         setActive={setActive}
         segmentItems={extractSegmentItems(resumeData)}
       />
       <SegmentDescription
+        isMobile={isMobile}
         segmentDescriptionList={resumeData[active].segmentDescription}
       />
     </Flex>

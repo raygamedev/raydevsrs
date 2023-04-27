@@ -1,4 +1,4 @@
-import { Card, Text, Badge, Group, createStyles } from '@mantine/core';
+import { Card, Text, Badge, Group, createStyles, Divider } from '@mantine/core';
 import { Colors } from '../../styles/colors';
 import { SegmentDescriptionData } from './types';
 
@@ -21,17 +21,64 @@ const useStyles = createStyles((theme) => ({
   body: {
     padding: theme.spacing.md,
   },
+
+  group: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+  },
+
+  textDivider: {
+    backgroundColor: 'violet',
+    width: '70%',
+    borderRadius: 10,
+    alignSelf: 'center',
+    height: 1,
+  },
 }));
 
 interface SegmentDescriptionProps {
   segmentDescriptionList: SegmentDescriptionData[];
+  isMobile: boolean;
 }
 
 export const SegmentDescription = ({
   segmentDescriptionList,
+  isMobile
 }: SegmentDescriptionProps) => {
   const { classes } = useStyles();
-  return (
+  return isMobile ? (
+    <Card radius={10} style={{ width: '97%' }}>
+      {segmentDescriptionList.map(
+        (item: SegmentDescriptionData, index: number) => (
+          <>
+            <Group style={{ gap: 3 }} position="left" mt="md" mb="xs">
+              {item.badge.map((badge) => (
+                <Badge key={badge} size="lg" color="violet" variant="light">
+                  {badge}
+                </Badge>
+              ))}
+            </Group>
+            <Group className={classes.group}>
+              {item.text.map((text, index) => (
+                <Group key={index} noWrap position="left">
+                  <Text>•</Text>
+                  <Text size="sm" color="dimmed">
+                    {text}
+                  </Text>
+                </Group>
+              ))}
+              {index !== segmentDescriptionList.length - 1 && (
+                <Divider className={classes.textDivider} />
+              )}
+            </Group>
+          </>
+        ),
+      )}
+    </Card>
+  ) : (
     <Card
       className={classes.root}
       shadow="sm"
