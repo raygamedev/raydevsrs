@@ -5,7 +5,7 @@ import { Resume } from './components/Resume/Resume';
 import { Profile } from './components/Profile/Profile';
 import Summary from './components/Summary/Summary';
 import GameButton from './components/GameButton/GameButton';
-import ProfilePicture from './art/profiePicture.png';
+import useIsMobile from './hooks/useIsMobile';
 const useStyles = createStyles(() => ({
   root: {
     display: 'flex',
@@ -17,6 +17,8 @@ const useStyles = createStyles(() => ({
     width: '80%',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   summaryContainer: {
     display: 'flex',
@@ -24,30 +26,23 @@ const useStyles = createStyles(() => ({
     width: '80%',
   },
 }));
-const isMobile = matchMedia('(max-width: 600px)').matches;
-console.log(isMobile);
-function App() {
+const App = () => {
+  const isMobile = useIsMobile();
   const { classes } = useStyles();
   return (
     <Flex className={classes.root}>
-      <TopBar />
+      <TopBar isMobile={isMobile} />
       <Flex className={classes.profileGame}>
-        <Profile
-          avatar={ProfilePicture}
-          name={'Dan Raymond'}
-          title={'Fullstack Software Developer'}
-          phone={'+972-526865438'}
-          email={'dan@raydevs.com'}
-        />
-        {/* <GameButton /> */}
+        <Profile />
+        <GameButton />
       </Flex>
       <Summary />
       <Resume />
     </Flex>
   );
-}
+};
 
-function RayDevs() {
+const RayDevs = () => {
   return (
     <MantineProvider
       withGlobalStyles
@@ -62,6 +57,6 @@ function RayDevs() {
       <App />
     </MantineProvider>
   );
-}
+};
 
 export default RayDevs;

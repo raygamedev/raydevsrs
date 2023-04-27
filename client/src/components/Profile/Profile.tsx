@@ -1,6 +1,6 @@
 import { createStyles, Avatar, Text, Group } from '@mantine/core';
 import { IconPhoneCall, IconAt } from '@tabler/icons-react';
-
+import ProfilePicture from '../../art/profiePicture.png';
 const useStyles = createStyles((theme) => ({
   root: {
     width: '80%',
@@ -17,18 +17,30 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface ProfileProps {
+interface ProfileType {
   avatar: string;
   name: string;
   title: string;
   phone: string;
   email: string;
 }
-
-export function Profile({ avatar, name, title, phone, email }: ProfileProps) {
+const ProfileData: ProfileType = {
+  avatar: ProfilePicture,
+  name: 'Dan Raymond',
+  title: 'Fullstack Software Developer',
+  phone: '+972-526865438',
+  email: 'dan@raydevs.com',
+};
+// TODO: Make phone and email copyable
+export function Profile() {
+  const { avatar, name, title, phone, email } = ProfileData;
   const { classes } = useStyles();
   return (
-    <Group noWrap>
+    <Group
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}>
       <Avatar src={avatar} size={200} radius="md" />
       <div>
         <Text fz="xs" tt="uppercase" fw={700} c="dimmed">

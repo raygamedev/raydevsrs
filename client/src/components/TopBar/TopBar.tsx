@@ -5,13 +5,14 @@ import {
   Container,
   Group,
   rem,
-  Button,
 } from '@mantine/core';
 import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconFileDescription,
 } from '@tabler/icons-react';
+
+import TopBarButton from './TopBarButton';
 
 const HEADER_HEIGHT = rem(60);
 
@@ -24,8 +25,10 @@ const useStyles = createStyles((theme) => ({
 
   header: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
+    maxWidth: '100%',
+    width: '100%',
     height: '100%',
   },
   title: {
@@ -35,41 +38,40 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function TopBar() {
+interface TopBarProps {
+  isMobile: boolean;
+}
+
+export function TopBar({ isMobile }: TopBarProps) {
   const { classes } = useStyles();
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <Text className={classes.title}>Raydevs</Text>
-        <Group>
-          {/* <Button
-            component="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/raygamedev"
-            color="violet"
-            leftIcon={<IconFileDescription size={rem(20)} />}>
-            CV
-          </Button> */}
-          <Button
-            component="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/raygamedev"
-            color="gray"
-            leftIcon={<IconBrandGithub size={rem(20)} />}>
-            GitHub
-          </Button>
-          <Button
-            component="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/ray-dev/"
-            color="gray"
-            leftIcon={<IconBrandLinkedin size={rem(20)} />}>
-            Linkedin
-          </Button>
+        <Group noWrap>
+          <TopBarButton
+            text={'GitHub'}
+            icon={<IconBrandGithub size={rem(20)} />}
+            color={'gray'}
+            link={'https://github.com/raygamedev'}
+            isMobile={isMobile}
+          />
+          <TopBarButton
+            text={'LinkedIn'}
+            icon={<IconBrandLinkedin size={rem(20)} />}
+            color={'gray'}
+            link={'https://www.linkedin.com/in/ray-dev/'}
+            isMobile={isMobile}
+          />
+
+          <TopBarButton
+            text={'CV'}
+            icon={<IconFileDescription size={rem(20)} />}
+            color={'violet'}
+            link={''}
+            isMobile={isMobile}
+          />
         </Group>
       </Container>
     </Header>
