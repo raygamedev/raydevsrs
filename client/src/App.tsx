@@ -1,5 +1,5 @@
 import { MantineProvider, Flex, createStyles, Group } from '@mantine/core';
-import './App.css';
+import './fonts/Fonts.css';
 import { TopBar } from './components/TopBar/TopBar';
 import { Resume } from './components/Resume/Resume';
 import { Profile } from './components/Profile/Profile';
@@ -24,7 +24,8 @@ const useStyles = createStyles(() => ({
     width: '80%',
   },
 }));
-
+const isMobile = matchMedia('(max-width: 600px)').matches;
+console.log(isMobile);
 function App() {
   const { classes } = useStyles();
   return (
