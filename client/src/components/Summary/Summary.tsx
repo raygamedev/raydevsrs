@@ -1,18 +1,5 @@
 import { Text, Container, Group, createStyles } from '@mantine/core';
 
-const useStyles = createStyles((theme) => ({
-  container: {
-    backgroundColor:
-      theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
-    boxShadow: theme.shadows.md,
-    borderRadius: 30,
-    padding: 20,
-    width: '95%',
-    border: `${theme.spacing.xl} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]
-    }`,
-  },
-}));
 interface SummaryBlock {
   title: string;
   text: string[];
@@ -42,6 +29,19 @@ const SummaryBlocks: SummaryBlock[] = [
   },
 ];
 
+const useStyles = createStyles((theme) => ({
+  container: {
+    backgroundColor:
+      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    boxShadow: theme.shadows.md,
+    borderRadius: 30,
+    padding: 20,
+    width: '95%',
+    border: `${theme.spacing.xl} solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]
+    }`,
+  },
+}));
 const Summary = () => {
   const { classes } = useStyles();
   return (

@@ -1,3 +1,4 @@
+import { Unity, useUnityContext } from 'react-unity-webgl';
 import {
   Flex,
   createStyles,
@@ -14,21 +15,8 @@ import { ResumeCardType } from './enums';
 import { ResumeData, ResumeKeys, SegmentItemData } from './types';
 import { SegmentDescription } from './SegmentDescription';
 import { IconGauge, IconFingerprint } from '@tabler/icons-react';
-
-const useStyles = createStyles((theme) => ({
-  root: {
-    backgroundColor:
-      theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
-    boxShadow: theme.shadows.md,
-    width: '80%',
-    borderRadius: 30,
-    padding: 20,
-    justifyContent: 'space-around',
-    border: `${theme.spacing.xl} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]
-    }`,
-  },
-}));
+import { PlebsJourney } from '../PlebsJourney/PlebsJourney';
+import Summary from '../Summary/Summary';
 
 const resumeData: ResumeData = {
   [ResumeKeys.SoftwareDeveloper]: {
@@ -130,6 +118,34 @@ const resumeData: ResumeData = {
     ],
   },
 };
+
+const useStyles = createStyles((theme) => ({
+  root: {
+    position: 'relative',
+    backgroundColor:
+      theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+    boxShadow: theme.shadows.md,
+    width: '80%',
+    minHeight: 900,
+    flexGrow: 1,
+    borderRadius: 30,
+    gap: 20,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    border: `${theme.spacing.xl} solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]
+    }`,
+  },
+  segment: {
+    width: '100%',
+    minHeight: 500,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+}));
 interface ResumeProps {
   isMobile: boolean;
 }
@@ -138,6 +154,13 @@ export const Resume = ({ isMobile }: ResumeProps) => {
   const [active, setActive] = useState<ResumeCardType>(
     ResumeCardType.SoftwareDeveloper,
   );
+
+  const { unityProvider } = useUnityContext({
+    loaderUrl: 'build/build.loader.js',
+    dataUrl: 'build/build.data',
+    frameworkUrl: 'build/build.framework.js',
+    codeUrl: 'build/build.wasm',
+  });
 
   const extractSegmentItems = (
     resumeData: ResumeData,
@@ -159,9 +182,8 @@ export const Resume = ({ isMobile }: ResumeProps) => {
 
   return isMobile ? (
     <Box w={'100%'}>
-      {Object.entries(resumeData).map(([key, value]) => {
+      {Object.keys(resumeData).map((key) => {
         const item = resumeData[key as ResumeCardType].segmentItem;
-        console.log(item);
         return (
           <NavLink
             key={key}
@@ -170,7 +192,9 @@ export const Resume = ({ isMobile }: ResumeProps) => {
             childrenOffset={28}>
             <SegmentDescription
               isMobile={isMobile}
-              segmentDescriptionList={resumeData[active].segmentDescription}
+              segmentDescriptionList={
+                resumeData[key as ResumeCardType].segmentDescription
+              }
             />
           </NavLink>
         );
@@ -178,14 +202,27 @@ export const Resume = ({ isMobile }: ResumeProps) => {
     </Box>
   ) : (
     <Flex className={classes.root}>
-      <SegmentControl
-        setActive={setActive}
-        segmentItems={extractSegmentItems(resumeData)}
+      <Summary />
+      <Unity
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          borderRadius: '15px',
+          opacity: 0,
+        }}
+        unityProvider={unityProvider}
       />
-      <SegmentDescription
-        isMobile={isMobile}
-        segmentDescriptionList={resumeData[active].segmentDescription}
-      />
+      <Flex className={classes.segment}>
+        <SegmentControl
+          setActive={setActive}
+          segmentItems={extractSegmentItems(resumeData)}
+        />
+        <SegmentDescription
+          isMobile={isMobile}
+          segmentDescriptionList={resumeData[active].segmentDescription}
+        />
+      </Flex>
     </Flex>
   );
 };

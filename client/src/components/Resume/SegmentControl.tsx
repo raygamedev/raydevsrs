@@ -8,6 +8,7 @@ import { ResumeCardType } from './enums';
 
 const useStyles = createStyles((theme) => ({
   root: {
+    height: '90%',
     backgroundColor:
       theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
   },

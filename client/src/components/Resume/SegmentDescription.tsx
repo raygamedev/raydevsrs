@@ -8,6 +8,8 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     borderRadius: 30,
     width: '60%',
+    height: '75%',
+    overflowY: 'scroll',
   },
 
   title: {
