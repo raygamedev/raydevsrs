@@ -13,6 +13,7 @@ import Summary from './components/Summary/Summary';
 import GameButton from './components/GameButton/GameButton';
 import useIsMobile from './hooks/useIsMobile';
 import { PlebsJourney } from './components/PlebsJourney/PlebsJourney';
+import { useState } from 'react';
 const useStyles = createStyles(() => ({
   root: {
     display: 'flex',
@@ -38,6 +39,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 const App = () => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const isMobile = useIsMobile();
   const { classes } = useStyles();
   return (
@@ -45,9 +47,9 @@ const App = () => {
       <TopBar isMobile={isMobile} />
       <Flex className={classes.profileGame}>
         <Profile />
-        <GameButton />
+        <GameButton isPlaying={isPlaying} onClick={setIsPlaying} />
       </Flex>
-      <Resume isMobile={isMobile} />
+      <Resume isPlaying={isPlaying} isMobile={isMobile} />
     </Flex>
   );
 };

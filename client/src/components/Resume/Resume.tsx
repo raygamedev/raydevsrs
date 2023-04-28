@@ -1,4 +1,5 @@
 import { Unity, useUnityContext } from 'react-unity-webgl';
+import { motion } from 'framer-motion';
 import {
   Flex,
   createStyles,
@@ -145,11 +146,15 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+  div: {
+    height: '100%',
+  },
 }));
 interface ResumeProps {
   isMobile: boolean;
+  isPlaying: boolean;
 }
-export const Resume = ({ isMobile }: ResumeProps) => {
+export const Resume = ({ isMobile, isPlaying }: ResumeProps) => {
   const { classes } = useStyles();
   const [active, setActive] = useState<ResumeCardType>(
     ResumeCardType.SoftwareDeveloper,
@@ -202,27 +207,53 @@ export const Resume = ({ isMobile }: ResumeProps) => {
     </Box>
   ) : (
     <Flex className={classes.root}>
-      <Summary />
-      <Unity
+      <motion.div
+        transition={{ type: 'spring', duration: 0.8 }}
+        animate={{
+          x: 0,
+          y: isPlaying ? 0 : 2000,
+          opacity: isPlaying ? 1 : 0,
+          // transition: {
+          //   ease: 'easeInOut',
+          //   duration: 0.5,
+          // },
+          rotate: 0,
+        }}
         style={{
           position: 'absolute',
           width: '100%',
           height: '100%',
           borderRadius: '15px',
-          opacity: 0,
-        }}
-        unityProvider={unityProvider}
-      />
-      <Flex className={classes.segment}>
-        <SegmentControl
-          setActive={setActive}
-          segmentItems={extractSegmentItems(resumeData)}
+        }}>
+        <Unity
+          style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: '15px',
+          }}
+          unityProvider={unityProvider}
         />
-        <SegmentDescription
-          isMobile={isMobile}
-          segmentDescriptionList={resumeData[active].segmentDescription}
-        />
-      </Flex>
+      </motion.div>
+      <motion.div
+        animate={{
+          x: 0,
+          y: 0,
+          scale: isPlaying ? 0 : 1,
+          opacity: isPlaying ? 0 : 1,
+          rotate: 0,
+        }}>
+        <Summary />
+        <Flex className={classes.segment}>
+          <SegmentControl
+            setActive={setActive}
+            segmentItems={extractSegmentItems(resumeData)}
+          />
+          <SegmentDescription
+            isMobile={isMobile}
+            segmentDescriptionList={resumeData[active].segmentDescription}
+          />
+        </Flex>
+      </motion.div>
     </Flex>
   );
 };
