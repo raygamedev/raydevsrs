@@ -186,25 +186,28 @@ export const Resume = ({ isMobile, isPlaying }: ResumeProps) => {
   };
 
   return isMobile ? (
-    <Box w={'100%'}>
-      {Object.keys(resumeData).map((key) => {
-        const item = resumeData[key as ResumeCardType].segmentItem;
-        return (
-          <NavLink
-            key={key}
-            label={item.title}
-            icon={<Avatar size="1rem" src={item.company.avatar} />}
-            childrenOffset={28}>
-            <SegmentDescription
-              isMobile={isMobile}
-              segmentDescriptionList={
-                resumeData[key as ResumeCardType].segmentDescription
-              }
-            />
-          </NavLink>
-        );
-      })}
-    </Box>
+    <>
+      <Summary />
+      <Box w={'100%'}>
+        {Object.keys(resumeData).map((key) => {
+          const item = resumeData[key as ResumeCardType].segmentItem;
+          return (
+            <NavLink
+              key={key}
+              label={item.title}
+              icon={<Avatar size="1rem" src={item.company.avatar} />}
+              childrenOffset={28}>
+              <SegmentDescription
+                isMobile={isMobile}
+                segmentDescriptionList={
+                  resumeData[key as ResumeCardType].segmentDescription
+                }
+              />
+            </NavLink>
+          );
+        })}
+      </Box>
+    </>
   ) : (
     <Flex className={classes.root}>
       <motion.div
