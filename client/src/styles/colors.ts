@@ -5,7 +5,7 @@ export enum Colors {
   RED = '#FF0000',
   GREEN = '#00FF00',
   BLUE = '#0000FF',
-  LIGHT_PURPLE = '#CBC3E3',
+  LIGHT_PURPLE = '#CBB9ED',
   LIGHT_VIOLET = '#CF9FFF',
   LIAC = '#AA98A9',
   MAUVE = '#E0B0FF',

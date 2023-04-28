@@ -1,4 +1,5 @@
 import { Text, Container, Group, createStyles } from '@mantine/core';
+import { Colors } from '../../styles/colors';
 
 interface SummaryBlock {
   title: string;
@@ -49,7 +50,7 @@ const Summary = () => {
       {SummaryBlocks.map((block) => {
         return (
           <Container className={classes.container} key={block.title} size="xs">
-            <Text>{block.title}</Text>
+            <Text color={Colors.LIGHT_PURPLE}>{block.title}</Text>
             {block.text.map((text, index) => {
               return (
                 <Group noWrap key={index} position="left">

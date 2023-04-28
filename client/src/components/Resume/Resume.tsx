@@ -17,7 +17,7 @@ import { ResumeData, ResumeKeys, SegmentItemData } from './types';
 import { SegmentDescription } from './SegmentDescription';
 import { IconGauge, IconFingerprint } from '@tabler/icons-react';
 import { PlebsJourney } from '../PlebsJourney/PlebsJourney';
-import Summary from '../Summary/Summary';
+import Summary from './Summary';
 
 const resumeData: ResumeData = {
   [ResumeKeys.SoftwareDeveloper]: {
@@ -216,10 +216,6 @@ export const Resume = ({ isMobile, isPlaying }: ResumeProps) => {
           x: 0,
           y: isPlaying ? 0 : 2000,
           opacity: isPlaying ? 1 : 0,
-          // transition: {
-          //   ease: 'easeInOut',
-          //   duration: 0.5,
-          // },
           rotate: 0,
         }}
         style={{
