@@ -20,6 +20,7 @@ const useStyles = createStyles(() => ({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    gap: 20,
   },
   summaryContainer: {
     display: 'flex',

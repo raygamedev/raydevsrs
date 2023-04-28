@@ -6,12 +6,14 @@ import {
   IconPlayerPlay,
 } from '@tabler/icons-react';
 
+const BUTTON_WIDTH = 300;
+
 const useStyles = createStyles((theme) => ({
   root: {
     backgroundColor:
       theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
     boxShadow: theme.shadows.md,
-    width: 300,
+    width: BUTTON_WIDTH,
     height: 100,
     fontSize: 37,
     borderRadius: 10,
@@ -20,6 +22,11 @@ const useStyles = createStyles((theme) => ({
     border: `${theme.spacing.xl} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[1]
     }`,
+  },
+  container: {
+    width: '100%',
+    maxWidth: window.innerWidth <= 768 ? 768 : BUTTON_WIDTH,
+    justifyContent: 'center',
   },
   text: {
     color: theme.colorScheme == 'dark' ? theme.white : theme.colors.dark[7],
@@ -51,7 +58,7 @@ const GameButton = ({ isPlaying, onClick }: GameButtonProps) => {
           text: 'try me',
         };
   return (
-    <>
+    <Group className={classes.container}>
       <Modal
         radius={15}
         opened={isPlaying && isMobile}
@@ -83,7 +90,7 @@ const GameButton = ({ isPlaying, onClick }: GameButtonProps) => {
         gradient={buttonStyle.gradient}>
         {buttonStyle.text}
       </Button>
-    </>
+    </Group>
   );
 };
 
