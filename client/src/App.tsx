@@ -1,18 +1,10 @@
-import {
-  MantineProvider,
-  Flex,
-  createStyles,
-  Group,
-  Container,
-} from '@mantine/core';
+import { MantineProvider, Flex, createStyles } from '@mantine/core';
 import './fonts/Fonts.css';
 import { TopBar } from './components/TopBar/TopBar';
 import { Resume } from './components/Resume/Resume';
 import { Profile } from './components/Profile/Profile';
-import Summary from './components/Summary/Summary';
 import GameButton from './components/GameButton/GameButton';
 import useIsMobile from './hooks/useIsMobile';
-import { PlebsJourney } from './components/PlebsJourney/PlebsJourney';
 import { useState } from 'react';
 const useStyles = createStyles(() => ({
   root: {
