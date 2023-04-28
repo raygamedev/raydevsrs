@@ -1,5 +1,18 @@
-import { createStyles, Avatar, Text, Group } from '@mantine/core';
-import { IconPhoneCall, IconAt } from '@tabler/icons-react';
+import {
+  createStyles,
+  Avatar,
+  Text,
+  Group,
+  CopyButton,
+  Tooltip,
+  ActionIcon,
+} from '@mantine/core';
+import {
+  IconPhoneCall,
+  IconAt,
+  IconCheck,
+  IconCopy,
+} from '@tabler/icons-react';
 import ProfilePicture from '../../art/profiePicture.png';
 const useStyles = createStyles((theme) => ({
   root: {
@@ -13,7 +26,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   name: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontFamily: `${theme.fontFamily}`,
   },
 }));
 
@@ -43,26 +56,58 @@ export function Profile() {
       }}>
       <Avatar src={avatar} size={200} radius="md" />
       <div>
-        <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
+        <Text fz="md" tt="uppercase" fw={700} c="dimmed">
           {title}
         </Text>
 
-        <Text fz="lg" fw={500} className={classes.name}>
+        <Text fz="xl" fw={500} className={classes.name}>
           {name}
         </Text>
 
-        <Group noWrap spacing={10} mt={3}>
+        <Group noWrap spacing={10} mt={10}>
           <IconAt stroke={1.5} size="1rem" className={classes.icon} />
-          <Text fz="xs" c="dimmed">
+          <Text fz="md" c="dimmed">
             {email}
           </Text>
+          <CopyButton value={email} timeout={2000}>
+            {({ copied, copy }) => (
+              <Tooltip
+                label={copied ? 'Copied' : 'Copy'}
+                withArrow
+                position="right">
+                <ActionIcon color={copied ? 'violet' : 'gray'} onClick={copy}>
+                  {copied ? (
+                    <IconCheck size="1rem" />
+                  ) : (
+                    <IconCopy size="1rem" />
+                  )}
+                </ActionIcon>
+              </Tooltip>
+            )}
+          </CopyButton>
         </Group>
 
         <Group noWrap spacing={10} mt={5}>
           <IconPhoneCall stroke={1.5} size="1rem" className={classes.icon} />
-          <Text fz="xs" c="dimmed">
+          <Text fz="md" c="dimmed">
             {phone}
           </Text>
+          <CopyButton value={phone} timeout={2000}>
+            {({ copied, copy }) => (
+              <Tooltip
+                label={copied ? 'Copied' : 'Copy'}
+                withArrow
+                position="right">
+                <ActionIcon color={copied ? 'violet' : 'gray'} onClick={copy}>
+                  {copied ? (
+                    <IconCheck size="1rem" />
+                  ) : (
+                    <IconCopy size="1rem" />
+                  )}
+                </ActionIcon>
+              </Tooltip>
+            )}
+          </CopyButton>
         </Group>
       </div>
     </Group>
