@@ -6,6 +6,7 @@ import { Profile } from './components/Profile/Profile';
 import GameButton from './components/GameButton/GameButton';
 import useIsMobile from './hooks/useIsMobile';
 import { useState } from 'react';
+import { Footer } from './components/Footer/Footer';
 const useStyles = createStyles(() => ({
   root: {
     display: 'flex',
@@ -43,6 +44,7 @@ const App = () => {
         <GameButton isPlaying={isPlaying} onClick={setIsPlaying} />
       </Flex>
       <Resume isPlaying={isPlaying} isMobile={isMobile} />
+      <Footer />
     </Flex>
   );
 };

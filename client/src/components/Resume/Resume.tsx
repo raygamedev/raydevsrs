@@ -7,16 +7,16 @@ import {
   Box,
   NavLink,
   Avatar,
+  Text,
+  Group,
 } from '@mantine/core';
 import { SegmentControl } from './SegmentControl';
 import { SegmentItem } from './SegmentItem';
 import InspektoLogo from '../../art/InspektoLogo.png';
 import { useState } from 'react';
 import { ResumeCardType } from './enums';
-import { ResumeData, ResumeKeys, SegmentItemData } from './types';
+import { ResumeData, ResumeKeys } from './types';
 import { SegmentDescription } from './SegmentDescription';
-import { IconGauge, IconFingerprint } from '@tabler/icons-react';
-import { PlebsJourney } from '../PlebsJourney/PlebsJourney';
 import Summary from './Summary';
 
 const resumeData: ResumeData = {
@@ -194,7 +194,14 @@ export const Resume = ({ isMobile, isPlaying }: ResumeProps) => {
           return (
             <NavLink
               key={key}
-              label={item.title}
+              label={
+                <Group>
+                  <Text>{item.title}</Text>
+                  <Text align="left" size="xs" color="dimmed">
+                    {item.startDate} - {item.endDate}
+                  </Text>
+                </Group>
+              }
               icon={<Avatar size="1rem" src={item.company.avatar} />}
               childrenOffset={28}>
               <SegmentDescription
@@ -211,6 +218,7 @@ export const Resume = ({ isMobile, isPlaying }: ResumeProps) => {
   ) : (
     <Flex className={classes.root}>
       <motion.div
+        hidden={!isPlaying}
         transition={{ type: 'spring', duration: 0.8 }}
         animate={{
           x: 0,
