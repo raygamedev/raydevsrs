@@ -9,7 +9,7 @@ const SummaryBlocks: SummaryBlock[] = [
   {
     title: 'Summary',
     text: [
-      'Level 5 Linux Master and Level 4 Full-Stack Developer skilled in Python, React, Typescript. Adept at leveling up skills independently and grinding knowledge in technology and software development. With a remarkable ability to maintain focus during epic quests, they unleash their creativity in video game development and harness the power of the Rust language.',
+      'Level 5 Linux Master and Level 4 Full-Stack Developer skilled in Python, React, Typescript. Adept at leveling up skills independently and grinding knowledge in technology and software development. With a remarkable ability to maintain focus during epic quests, he unleashes his creativity in video game development and harness the power of the Rust language.',
     ],
   },
   {

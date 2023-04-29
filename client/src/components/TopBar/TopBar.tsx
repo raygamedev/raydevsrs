@@ -11,7 +11,7 @@ import {
   IconBrandLinkedin,
   IconFileDescription,
 } from '@tabler/icons-react';
-
+import { downloadFile } from '../../api';
 import TopBarButton from './TopBarButton';
 
 const HEADER_HEIGHT = rem(60);
@@ -64,12 +64,11 @@ export function TopBar({ isMobile }: TopBarProps) {
             link={'https://www.linkedin.com/in/ray-dev/'}
             isMobile={isMobile}
           />
-
           <TopBarButton
             text={'CV'}
             icon={<IconFileDescription size={rem(20)} />}
             color={'violet'}
-            link={''}
+            onClick={downloadFile}
             isMobile={isMobile}
           />
         </Group>

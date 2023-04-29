@@ -4,8 +4,9 @@ interface TopBarButtonProps {
   text: string;
   icon: React.ReactNode;
   color: string;
-  link: string;
+  link?: string;
   isMobile: boolean;
+  onClick?: (event: { preventDefault: () => void }) => void;
 }
 const TopBarButton = ({
   text,
@@ -13,18 +14,21 @@ const TopBarButton = ({
   color,
   link,
   isMobile,
+  onClick,
 }: TopBarButtonProps) => {
   return isMobile ? (
     <Button
       component="a"
       target="_blank"
       rel="noopener noreferrer"
+      onClick={onClick}
       href={link}
       color={color}>
       {icon}
     </Button>
   ) : (
     <Button
+      onClick={onClick}
       component="a"
       target="_blank"
       rel="noopener noreferrer"
