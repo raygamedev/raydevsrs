@@ -3,11 +3,11 @@ services:
   client:
     platform: linux/amd64
     build:
-      context: client
-      dockerfile: Dockerfile
+      context: "."
+      dockerfile: raydevsrs.Dockerfile
     ports:
       - "3000:3000"
-    image: ghcr.io/raygamedev/raydevsrs:client
-    command: serve -s -l 3000 build
+    image: ghcr.io/raygamedev/raydevsrs:latest
+    command: /app/server
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
