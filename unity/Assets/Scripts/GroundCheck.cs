@@ -1,22 +1,23 @@
-using System;
-using UnityEngine;
-
-public class GroundCheck : MonoBehaviour
+namespace Raydevs
 {
-    private RayController _rayController;
-
-    private void Start()
+    using UnityEngine;
+    public class GroundCheck : MonoBehaviour
     {
-        _rayController = GetComponentInParent<RayController>();
-    }
+        private RayController _rayController;
 
-    private void OnTriggerStay2D(Collider2D col)
-    {   
-        
-        if(col.gameObject.CompareTag($"Ground"))
+        private void Start()
         {
-            _rayController.IsGrounded = true;
+            _rayController = GetComponentInParent<RayController>();
         }
-        
+
+        private void OnTriggerStay2D(Collider2D col)
+        {
+
+            if (col.gameObject.CompareTag($"Ground"))
+            {
+                _rayController.IsGrounded = true;
+            }
+
+        }
     }
 }

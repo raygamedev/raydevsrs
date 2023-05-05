@@ -44,6 +44,15 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interactable"",
+                    ""type"": ""Button"",
+                    ""id"": ""63d3680c-617d-48e9-8b15-e50550435c30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,6 +132,17 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d672e62-9dcd-4894-9936-d5407026b135"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interactable"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -133,6 +153,7 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
         m_RayControls = asset.FindActionMap("RayControls", throwIfNotFound: true);
         m_RayControls_Movement = m_RayControls.FindAction("Movement", throwIfNotFound: true);
         m_RayControls_Jump = m_RayControls.FindAction("Jump", throwIfNotFound: true);
+        m_RayControls_Interactable = m_RayControls.FindAction("Interactable", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,12 +215,14 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
     private IRayControlsActions m_RayControlsActionsCallbackInterface;
     private readonly InputAction m_RayControls_Movement;
     private readonly InputAction m_RayControls_Jump;
+    private readonly InputAction m_RayControls_Interactable;
     public struct RayControlsActions
     {
         private @RayInput m_Wrapper;
         public RayControlsActions(@RayInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_RayControls_Movement;
         public InputAction @Jump => m_Wrapper.m_RayControls_Jump;
+        public InputAction @Interactable => m_Wrapper.m_RayControls_Interactable;
         public InputActionMap Get() { return m_Wrapper.m_RayControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -215,6 +238,9 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnJump;
+                @Interactable.started -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnInteractable;
+                @Interactable.performed -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnInteractable;
+                @Interactable.canceled -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnInteractable;
             }
             m_Wrapper.m_RayControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -225,6 +251,9 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Interactable.started += instance.OnInteractable;
+                @Interactable.performed += instance.OnInteractable;
+                @Interactable.canceled += instance.OnInteractable;
             }
         }
     }
@@ -233,5 +262,6 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnInteractable(InputAction.CallbackContext context);
     }
 }

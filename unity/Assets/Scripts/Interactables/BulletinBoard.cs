@@ -17,7 +17,8 @@ public class BulletinBoard : MonoBehaviour
 
     private void Update()
     {
-        _QuestionMark.SetActive(_hasNewQuest);
+        if(!_QuestionMark.activeInHierarchy)
+            _QuestionMark.SetActive(_hasNewQuest);
     }
     
 }
