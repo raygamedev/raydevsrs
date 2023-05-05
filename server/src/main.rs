@@ -43,6 +43,7 @@ async fn run() -> std::io::Result<()> {
 
 #[actix_rt::main]
 async fn main() {
+    println!("Starting server...");
     if let Err(err) = run().await {
         eprintln!("Error: {}", err);
         std::process::exit(1);
