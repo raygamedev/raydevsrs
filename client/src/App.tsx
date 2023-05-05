@@ -34,6 +34,7 @@ const useStyles = createStyles(() => ({
 }));
 const App = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isGameLoaded, setIsGameLoaded] = useState<boolean>(false);
   const isMobile = useIsMobile();
   const { classes } = useStyles();
   return (
@@ -41,9 +42,13 @@ const App = () => {
       <TopBar isMobile={isMobile} />
       <Flex className={classes.profileGame}>
         <Profile />
-        <GameButton isPlaying={isPlaying} onClick={setIsPlaying} />
+        <GameButton
+          isLoaded={isGameLoaded}
+          isPlaying={isPlaying}
+          onClick={setIsPlaying}
+        />
       </Flex>
-      <Resume isPlaying={isPlaying} isMobile={isMobile} />
+      <Resume isPlaying={isPlaying} setIsGameLoaded={setIsGameLoaded} />
       <Footer />
     </Flex>
   );

@@ -13,11 +13,12 @@ import {
 import { SegmentControl } from './SegmentControl';
 import { SegmentItem } from './SegmentItem';
 import InspektoLogo from '../../art/InspektoLogo.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ResumeCardType } from './enums';
 import { ResumeData, ResumeKeys } from './types';
 import { SegmentDescription } from './SegmentDescription';
 import Summary from './Summary';
+import useIsMobile from '../../hooks/useIsMobile';
 
 const resumeData: ResumeData = {
   [ResumeKeys.SoftwareDeveloper]: {
@@ -151,21 +152,24 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 interface ResumeProps {
-  isMobile: boolean;
   isPlaying: boolean;
+  setIsGameLoaded: (isLoaded: boolean) => void;
 }
-export const Resume = ({ isMobile, isPlaying }: ResumeProps) => {
+export const Resume = ({ isPlaying, setIsGameLoaded }: ResumeProps) => {
+  const isMobile = useIsMobile();
   const { classes } = useStyles();
   const [active, setActive] = useState<ResumeCardType>(
     ResumeCardType.SoftwareDeveloper,
   );
 
-  const { unityProvider } = useUnityContext({
+  const { unityProvider, isLoaded } = useUnityContext({
     loaderUrl: 'build/build.loader.js',
     dataUrl: 'build/build.data',
     frameworkUrl: 'build/build.framework.js',
     codeUrl: 'build/build.wasm',
   });
+
+  useEffect(() => setIsGameLoaded(isLoaded), [setIsGameLoaded, isLoaded]);
 
   const extractSegmentItems = (
     resumeData: ResumeData,
