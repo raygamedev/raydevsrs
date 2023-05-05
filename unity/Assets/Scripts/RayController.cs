@@ -54,6 +54,11 @@ namespace Raydevs
         {
             HandleInput();
             Flip();
+            if (IsFalling)
+            {
+                IsGrounded = false;
+                _animator.SetFloat(JumpState, 2);
+            }
             _animator.SetBool(Grounded, IsGrounded);
         }
 
@@ -91,7 +96,6 @@ namespace Raydevs
                 if (IsAboutToHitGround && IsFalling)
                     _animator.SetFloat(JumpState, 3);
                 else
-
                     _animator.SetFloat(JumpState, IsFalling ? 2 : 1);
 
             if (IsFalling && IsGrounded)

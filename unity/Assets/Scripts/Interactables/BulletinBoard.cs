@@ -1,24 +1,39 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class BulletinBoard : MonoBehaviour
+namespace Raydevs
 {
-    [SerializeField] private bool _hasNewQuest = true;
-    
-    private GameObject _QuestionMark;
-    // Start is called before the first frame update
-    // Update is called once per frame
-    private void Awake()
+    using UnityEngine;
+    public class BulletinBoard : Interactable
     {
-        _QuestionMark = transform.Find("QuestionMark").gameObject;
-    }
+        [SerializeField] private bool _hasNewQuest = true;
 
-    private void Update()
-    {
-        if(!_QuestionMark.activeInHierarchy)
-            _QuestionMark.SetActive(_hasNewQuest);
+        private GameObject _questionMark;
+        private GameObject _msgBox;
+
+        private void Awake()
+        {
+            _questionMark = transform.Find("QuestionMark").gameObject;
+            _msgBox = transform.Find("MessageBox").gameObject;
+        }
+
+        private void Update()
+        {
+            if (!_questionMark.activeInHierarchy)
+                _questionMark.SetActive(_hasNewQuest);
+        }
+
+        public override void Interact()
+        {
+            base.Interact();
+            _msgBox.SetActive(true);
+            if (!_hasNewQuest) return;
+            _hasNewQuest = false;
+            _questionMark.SetActive(false);
+        }
+
+        public override void OnInteractLeave()
+        {
+            base.OnInteractLeave();
+            _msgBox.SetActive(false);
+        }
     }
-    
 }
