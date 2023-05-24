@@ -1,10 +1,10 @@
 namespace Raydevs
 {
     using UnityEngine;
-    using UnityEngine.InputSystem;
+    // using UnityEngine.InputSystem;
     public class InteractController : InputManager
     {
-        [SerializeField] private GameObject _interactButton;
+        /*[SerializeField] private GameObject _interactButton;
         private GameObject _existingInteractButton;
         private GameObject _interactable;
         private RayInput _input;
@@ -62,6 +62,6 @@ namespace Raydevs
             if (_existingInteractButton == null) return;
             Destroy(_existingInteractButton);
             _isInteractionAvailable = false;
-        }
+        }*/
     }
 }

@@ -2,9 +2,9 @@ namespace Raydevs
 {
     using System.Collections;
     using UnityEngine;
-    using UnityEngine.InputSystem;
-    public class RayController : InputManager
-    {
+    // using UnityEngine.InputSystem;
+    public class RayController : InputManager {
+    /*{
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float _speed;
@@ -115,6 +115,6 @@ namespace Raydevs
             yield return new WaitForSeconds(delayTime);
             if (IsGrounded)
                 _animator.SetFloat(JumpState, 0);
-        }
+        }*/
     }
 }

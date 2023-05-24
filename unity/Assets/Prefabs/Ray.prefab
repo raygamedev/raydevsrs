@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1592565834158962430}
+  - component: {fileID: 5235619567238925784}
   - component: {fileID: 1592565834158962431}
-  - component: {fileID: 7530611463005986647}
-  - component: {fileID: 1592565834158962428}
-  - component: {fileID: 2560072447369781264}
   - component: {fileID: 1592565834158962427}
   - component: {fileID: 1592565834158962426}
   - component: {fileID: 1592565834158962429}
@@ -39,6 +37,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5235619567238925784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592565834158962304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc111ab171ab4e23adb6b6e85b74bfd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!95 &1592565834158962431
 Animator:
   serializedVersion: 4
@@ -59,50 +71,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7530611463005986647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592565834158962304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07383f7643a143a39db0da79cb48f420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1592565834158962428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592565834158962304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb93342b3cbb046719664a9819b365cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1592565834158962431}
-  _rigidbody2D: {fileID: 1592565834158962427}
-  _speed: 7
-  _jumpForce: 2000
-  _rayMass: 78
-  RigidbodyY: 0
-  raycastDistance: 2
---- !u!114 &2560072447369781264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592565834158962304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d6e43731d2824301bc66d33ff982f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactButton: {fileID: 2129559687017120952, guid: a2d5b89e0acb448f5845d0857fe581b8, type: 3}
 --- !u!50 &1592565834158962427
 Rigidbody2D:
   serializedVersion: 4

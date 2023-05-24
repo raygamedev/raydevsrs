@@ -3,11 +3,11 @@ namespace Raydevs
     using UnityEngine;
     public class GroundCheck : MonoBehaviour
     {
-        private RayController _rayController;
+        private RayStateMachine.RayStateMachine _stateMachine;
 
         private void Start()
         {
-            _rayController = GetComponentInParent<RayController>();
+            _stateMachine = GetComponentInParent<RayStateMachine.RayStateMachine>();
         }
 
         private void OnTriggerStay2D(Collider2D col)
@@ -15,7 +15,8 @@ namespace Raydevs
 
             if (col.gameObject.CompareTag($"Ground"))
             {
-                _rayController.IsGrounded = true;
+                Debug.Log("Grounded");
+                _stateMachine.IsGrounded = true;
             }
 
         }

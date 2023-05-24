@@ -1,10 +1,10 @@
 namespace Raydevs
 {
     using UnityEngine;
-    using UnityEngine.InputSystem;
+    // using UnityEngine.InputSystem;
     public class InputManager: MonoBehaviour
     {
-        private RayInput _rayInput;
+        /*private RayInput _rayInput;
 
         private void OnEnable()
         {
@@ -18,6 +18,6 @@ namespace Raydevs
         protected virtual void OnInteract(InputAction.CallbackContext ctx){}
         protected virtual void OnMove(InputAction.CallbackContext ctx){}
         protected virtual void OnJump(InputAction.CallbackContext ctx){}
-        protected virtual void OnDisable() => _rayInput.Disable();
+        protected virtual void OnDisable() => _rayInput.Disable();*/
     }
 }
