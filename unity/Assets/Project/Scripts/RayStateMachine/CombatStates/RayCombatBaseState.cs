@@ -1,11 +1,8 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 namespace Raydevs.RayStateMachine
 {
-    public class RayIdleState: RayBaseState
+    public class RayCombatBaseState: RayBaseState
     {
-        public RayIdleState(RayStateMachine currentContext, RayStateFactory stateFactory) : base(currentContext, stateFactory)
+        public RayCombatBaseState(RayStateMachine currentContext, RayStateFactory stateFactory) : base(currentContext, stateFactory)
         {
         }
 
@@ -15,12 +12,10 @@ namespace Raydevs.RayStateMachine
 
         public override void UpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            CheckSwitchState();
         }
 
         public override void FixedUpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            
         }
 
         public override void ExitState(RayStateMachine currentContext, RayStateFactory stateFactory)

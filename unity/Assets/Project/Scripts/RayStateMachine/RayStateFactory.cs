@@ -1,8 +1,9 @@
+
 namespace Raydevs.RayStateMachine
 {
     public class RayStateFactory
     {
-        RayStateMachine _context;
+        private readonly RayStateMachine _context;
         public RayStateFactory(RayStateMachine currentContext)
         {
             _context = currentContext;
@@ -23,6 +24,15 @@ namespace Raydevs.RayStateMachine
         public RayBaseState Grounded()
         {
             return new RayGroundedState(_context, this);
+        }
+        public RayBaseState Combat()
+        {
+            return new RayCombatStart(_context, this);
+        }
+
+        public RayBaseState CombatCombo()
+        {
+            return new RayCombatCombo(_context, this);
         }
     }
 }

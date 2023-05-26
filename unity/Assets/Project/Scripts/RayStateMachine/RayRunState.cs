@@ -12,8 +12,7 @@ namespace Raydevs.RayStateMachine
 
         public override void EnterState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            
-                _context.RayAnimator.SetBool(IsMoving, true);
+                _context.RayAnimator.Play("Run");
         }
 
         public override void UpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)
@@ -31,11 +30,14 @@ namespace Raydevs.RayStateMachine
         }
 
         public override void CheckSwitchState()
-        {
-            if(_context.IsMoving== false)
+        {   
+            if(_context.IsLightAttackPerformed || _context.IsHeavyAttackPerformed)
+                SwitchState(_stateFactory.Combat());
+            else if(_context.IsMoving== false)
                 SwitchState(_stateFactory.Grounded());
             else if (_context.IsJumpPerformed)
                 SwitchState(_stateFactory.Jump());
+            
         }
     }
 }

@@ -12,13 +12,8 @@ namespace Raydevs
 
         private void OnTriggerStay2D(Collider2D col)
         {
-
             if (col.gameObject.CompareTag($"Ground"))
-            {
-                Debug.Log("Grounded");
                 _stateMachine.IsGrounded = true;
-            }
-
         }
     }
 }

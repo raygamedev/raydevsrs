@@ -55,9 +55,18 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""LightAttack"",
                     ""type"": ""Button"",
                     ""id"": ""2f0a2bfa-ff53-4f02-b030-967d5d439ee5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb6ec1e5-9c53-4297-a03f-c602574e6a5d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -168,10 +177,21 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""b08dbb5b-f11e-431b-9a8b-a05f009b6d42"",
                     ""path"": ""<Keyboard>/q"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f55a501-01d9-4741-8ab1-8702ffa27e36"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -185,7 +205,8 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
         m_RayControls_Movement = m_RayControls.FindAction("Movement", throwIfNotFound: true);
         m_RayControls_Jump = m_RayControls.FindAction("Jump", throwIfNotFound: true);
         m_RayControls_Interactable = m_RayControls.FindAction("Interactable", throwIfNotFound: true);
-        m_RayControls_Attack = m_RayControls.FindAction("Attack", throwIfNotFound: true);
+        m_RayControls_LightAttack = m_RayControls.FindAction("LightAttack", throwIfNotFound: true);
+        m_RayControls_HeavyAttack = m_RayControls.FindAction("HeavyAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -248,7 +269,8 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_RayControls_Movement;
     private readonly InputAction m_RayControls_Jump;
     private readonly InputAction m_RayControls_Interactable;
-    private readonly InputAction m_RayControls_Attack;
+    private readonly InputAction m_RayControls_LightAttack;
+    private readonly InputAction m_RayControls_HeavyAttack;
     public struct RayControlsActions
     {
         private @RayInput m_Wrapper;
@@ -256,7 +278,8 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_RayControls_Movement;
         public InputAction @Jump => m_Wrapper.m_RayControls_Jump;
         public InputAction @Interactable => m_Wrapper.m_RayControls_Interactable;
-        public InputAction @Attack => m_Wrapper.m_RayControls_Attack;
+        public InputAction @LightAttack => m_Wrapper.m_RayControls_LightAttack;
+        public InputAction @HeavyAttack => m_Wrapper.m_RayControls_HeavyAttack;
         public InputActionMap Get() { return m_Wrapper.m_RayControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -275,9 +298,12 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                 @Interactable.started -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnInteractable;
                 @Interactable.performed -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnInteractable;
                 @Interactable.canceled -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnInteractable;
-                @Attack.started -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnAttack;
+                @LightAttack.started -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnLightAttack;
+                @LightAttack.performed -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnLightAttack;
+                @LightAttack.canceled -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnLightAttack;
+                @HeavyAttack.started -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.performed -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.canceled -= m_Wrapper.m_RayControlsActionsCallbackInterface.OnHeavyAttack;
             }
             m_Wrapper.m_RayControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -291,9 +317,12 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
                 @Interactable.started += instance.OnInteractable;
                 @Interactable.performed += instance.OnInteractable;
                 @Interactable.canceled += instance.OnInteractable;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
+                @LightAttack.started += instance.OnLightAttack;
+                @LightAttack.performed += instance.OnLightAttack;
+                @LightAttack.canceled += instance.OnLightAttack;
+                @HeavyAttack.started += instance.OnHeavyAttack;
+                @HeavyAttack.performed += instance.OnHeavyAttack;
+                @HeavyAttack.canceled += instance.OnHeavyAttack;
             }
         }
     }
@@ -303,6 +332,7 @@ public partial class @RayInput : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteractable(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
     }
 }

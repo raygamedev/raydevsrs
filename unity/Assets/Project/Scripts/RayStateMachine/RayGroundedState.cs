@@ -11,8 +11,7 @@ namespace Raydevs.RayStateMachine
 
         public override void EnterState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            Debug.Log("Entered Grounded State");
-            _context.RayAnimator.SetBool(Grounded, true);
+            _context.RayAnimator.Play("Idle");
         }
 
         public override void UpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)
@@ -31,13 +30,15 @@ namespace Raydevs.RayStateMachine
 
         public override void CheckSwitchState()
         {
-            if (_context.IsJumpPerformed)
+            if(_context.IsLightAttackPerformed || _context.IsHeavyAttackPerformed)
+                SwitchState(_stateFactory.Combat());
+            else if (_context.IsJumpPerformed)
             {
                 SwitchState(_stateFactory.Jump());
             } else if (_context.IsMoving)
             {
                 SwitchState(_stateFactory.Run());
-            }
+            } 
         }
         
     }

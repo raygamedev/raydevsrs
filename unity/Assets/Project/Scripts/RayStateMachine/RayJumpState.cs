@@ -13,7 +13,6 @@ namespace Raydevs.RayStateMachine
 
         public override void EnterState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            Debug.Log("Jumped");
             HandleJump();
         }
 
