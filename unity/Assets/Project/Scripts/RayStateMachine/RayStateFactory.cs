@@ -1,4 +1,6 @@
 
+using Project.Scripts.RayStateMachine.CombatStates;
+
 namespace Raydevs.RayStateMachine
 {
     public class RayStateFactory
@@ -7,11 +9,6 @@ namespace Raydevs.RayStateMachine
         public RayStateFactory(RayStateMachine currentContext)
         {
             _context = currentContext;
-        }
-        
-        public RayBaseState Idle()
-        {
-            return new RayIdleState(_context, this);
         }
         public RayBaseState Run()
         {
@@ -27,12 +24,15 @@ namespace Raydevs.RayStateMachine
         }
         public RayBaseState Combat()
         {
-            return new RayCombatStart(_context, this);
+            return new RayCombatState(_context, this);
         }
-
-        public RayBaseState CombatCombo()
+        public RayBaseState LeftPunch()
         {
-            return new RayCombatCombo(_context, this);
+            return new RayLeftPunchState(_context, this);
+        }
+        public RayBaseState RightPunch()
+        {
+            return new RayRightPunchState(_context, this);
         }
     }
 }
