@@ -1,4 +1,5 @@
 using Raydevs.RayStateMachine;
+using UnityEngine;
 
 namespace Project.Scripts.RayStateMachine.CombatStates
 {
@@ -10,7 +11,6 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void EnterState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            
         }
 
         public override void UpdateState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
@@ -24,8 +24,11 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void CheckSwitchState()
         {
-            if(ctx.CombatManager.IsLightAttackPerformed) 
+            if(ctx.CombatManager.ComboFinished)
+                SwitchState(state.Grounded());
+            else if(ctx.CombatManager.IsLightAttackPerformed) 
                 SwitchState(state.LeftPunch());
+            else SwitchState(state.Grounded());
         }
     }
 }

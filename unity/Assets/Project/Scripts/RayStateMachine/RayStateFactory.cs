@@ -18,10 +18,9 @@ namespace Raydevs.RayStateMachine
         {
             return new RayJumpState(_context, this);
         }
-        public RayBaseState Grounded()
-        {
-            return new RayGroundedState(_context, this);
-        }
+
+        public RayBaseState Idle() => new RayIdleState(_context, this);
+        public RayBaseState Grounded() => new RayGroundedState(_context, this);
         public RayBaseState Combat()
         {
             return new RayCombatState(_context, this);

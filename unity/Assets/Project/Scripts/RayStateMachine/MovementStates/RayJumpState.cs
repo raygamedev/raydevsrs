@@ -26,12 +26,8 @@ namespace Raydevs.RayStateMachine
 
         public override void CheckSwitchState()
         {
-            if (ctx.MovementManager.IsRunning)
-                SwitchState(state.Run());
-            else if (ctx.MovementManager.IsGrounded)
-            {
+            if (ctx.MovementManager.IsGrounded)
                 SwitchState(state.Grounded());
-            }
         }
         
         private void HandleJump()

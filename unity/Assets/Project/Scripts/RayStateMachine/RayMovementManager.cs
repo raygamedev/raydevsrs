@@ -9,6 +9,7 @@ namespace Project.Scripts.RayStateMachine
         [SerializeField] private Rigidbody2D _rigidbody;
         public bool IsGrounded { get; set; }
         public bool IsAirborne => !IsGrounded;
+        public bool IsAbleToMove { get; set; }
         public bool IsJumpPerformed { get; set; }
         public float MoveDir { get; set; }
         public bool IsRunning { get; set; }
@@ -48,7 +49,8 @@ namespace Project.Scripts.RayStateMachine
 
         private void FixedUpdate()
         {
-            _rigidbody.velocity = new Vector2(MoveDir * 9f, _rigidbody.velocity.y);
+            if(IsAbleToMove)
+                _rigidbody.velocity = new Vector2(MoveDir * 9f, _rigidbody.velocity.y);
         }
 
         private void Flip()

@@ -11,7 +11,7 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void EnterState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            Debug.Log("Entered");
+            ctx.MovementManager.IsAbleToMove = false;
             ctx.RayAnimator.Play("RightPunch");
         }
 
@@ -22,14 +22,16 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void ExitState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
+            ctx.CombatManager.ComboFinished = true;
+            ctx.CombatManager.FollowUpAttack = false;
             ctx.CombatManager.IsAnimationEnded = false;
-            ctx.CombatManager.AttackCounter = 0;
+            ctx.MovementManager.IsAbleToMove = true;
         }
 
         public override void CheckSwitchState()
         {
-            if(ctx.CombatManager.IsAnimationEnded || ctx.CombatManager.IsAttackTimerEnded)
-                SwitchState(state.Grounded());
+            if(ctx.CombatManager.IsAnimationEnded)
+                SwitchState(state.Combat());
         }
     }
 }

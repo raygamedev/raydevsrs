@@ -1,4 +1,5 @@
 using Raydevs.RayStateMachine;
+using UnityEngine;
 
 namespace Project.Scripts.RayStateMachine.CombatStates
 {
@@ -11,9 +12,11 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void EnterState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            if (ctx.CombatManager.AttackCounter == 2)
-                _skipState = true;
-            else ctx.RayAnimator.Play("LeftPunch");
+            
+            ctx.MovementManager.IsAbleToMove = false;
+            _skipState = ctx.CombatManager.FollowUpAttack && !ctx.CombatManager.IsAttackTimerEnded;
+            if (_skipState) return;
+            ctx.RayAnimator.Play("LeftPunch");
             
         }
 
@@ -25,19 +28,16 @@ namespace Project.Scripts.RayStateMachine.CombatStates
         public override void ExitState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
             ctx.CombatManager.IsAnimationEnded = false;
+            ctx.MovementManager.IsAbleToMove = true;
         }
 
         public override void CheckSwitchState()
         {
-            if (ctx.CombatManager.IsAnimationEnded || _skipState)
-            {
-                if (ctx.CombatManager.AttackCounter == 2)
-                {
-                    SwitchState(state.RightPunch());
-                }
-                else SwitchState(state.Grounded());
-            }
-            
+            if (_skipState) SwitchState(state.RightPunch());
+            else if(ctx.CombatManager.IsAnimationEnded && ctx.CombatManager.FollowUpAttack)
+                SwitchState(state.RightPunch());
+            else if(ctx.CombatManager.IsAnimationEnded)
+                SwitchState(state.Combat());
         }
     }
 }

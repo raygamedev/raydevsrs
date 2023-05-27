@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,12 +8,15 @@ namespace Project.Scripts.RayStateMachine
     {
         private Coroutine _attackTimerCoroutine;
         private const float AttackTimer = 0.7f;
+        public bool AnimEnded;
         public bool IsAnimationEnded { get; set; }
         public bool IsLightAttackPerformed { get; set; }
-        public int AttackCounter { get; set; } = 0;
-
 
         public bool IsAttackTimerEnded { get; set; }
+        public bool FollowUpAttack { get; set; }
+        public bool ComboFinished { get; set; }
+        
+        public int PressCounter { get; set; }
         private void OnEnable()
         {
             InputManager.OnAttackPressed += OnLightAttack;
@@ -24,12 +26,16 @@ namespace Project.Scripts.RayStateMachine
         {
             IsLightAttackPerformed = ctx.ReadValueAsButton();
             if(IsLightAttackPerformed)
-            { 
+            {
+                PressCounter++;
+                if (ComboFinished) ComboFinished = false;
+                if (!IsAttackTimerEnded && !FollowUpAttack && PressCounter > 1)
+                {
+                    Debug.Log("Follow up attack");
+                    FollowUpAttack = true;
+                }
                 StartOrResetTimer();
-                if(AttackCounter < 2)
-                    AttackCounter++;
             }
-            Debug.Log($"Attack counter: {AttackCounter}");
         }
 
         public void OnAnimationEnd()
@@ -53,8 +59,12 @@ namespace Project.Scripts.RayStateMachine
             yield return new WaitForSeconds(AttackTimer);
             Debug.Log("Attack timer ended");
             IsAttackTimerEnded = true;
-            AttackCounter = 0;
+            FollowUpAttack = false;
         }
 
+        private void Update()
+        {
+            if(ComboFinished) PressCounter = 0;
+        }
     }
 }
