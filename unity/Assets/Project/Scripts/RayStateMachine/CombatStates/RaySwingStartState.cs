@@ -1,18 +1,18 @@
 using Raydevs.RayStateMachine;
-using UnityEngine;
 
 namespace Project.Scripts.RayStateMachine.CombatStates
 {
-    public class RayRightPunchState: RayBaseState
+    public class RaySwingStartState: RayBaseState
     {
-        public RayRightPunchState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory) : base(currentContext, stateFactory)
+        public RaySwingStartState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory) : base(currentContext, stateFactory)
         {
+            
         }
 
         public override void EnterState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
             ctx.MovementManager.IsAbleToMove = false;
-            ctx.RayAnimator.Play(ctx.HasSword ? "LightAttack_2": "RightPunch");
+            ctx.RayAnimator.Play("SwingStarter");
         }
 
         public override void UpdateState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
@@ -22,15 +22,15 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void ExitState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            ctx.CombatManager.ComboFinished = true;
-            ctx.CombatManager.FollowUpAttack = false;
             ctx.CombatManager.IsAnimationEnded = false;
             ctx.MovementManager.IsAbleToMove = true;
         }
 
         public override void CheckSwitchState()
         {
-            if(ctx.CombatManager.IsAnimationEnded)
+            if(ctx.CombatManager.IsAnimationEnded && ctx.CombatManager.FollowUpAttack)
+                SwitchState(state.SwingContinuer());
+            else if(ctx.CombatManager.IsAnimationEnded)
                 SwitchState(state.Combat());
         }
     }

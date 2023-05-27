@@ -19,11 +19,19 @@ namespace Raydevs.RayStateMachine
             return new RayJumpState(_context, this);
         }
 
-        public RayBaseState Idle() => new RayIdleState(_context, this);
+        public RayBaseState Idle()
+        {
+            return new RayIdleState(_context, this);  
+        } 
         public RayBaseState Grounded() => new RayGroundedState(_context, this);
         public RayBaseState Combat()
         {
             return new RayCombatState(_context, this);
+        }
+
+        public RayBaseState BattleStance()
+        {
+            return new RayBattleStanceState(_context, this);
         }
         public RayBaseState LeftPunch()
         {
@@ -32,6 +40,18 @@ namespace Raydevs.RayStateMachine
         public RayBaseState RightPunch()
         {
             return new RayRightPunchState(_context, this);
+        }
+        public RayBaseState SwingStarter()
+        {
+            return new RaySwingStartState(_context, this);
+        }
+        public RayBaseState SwingContinuer()
+        {
+            return new RaySwingContinuerState(_context, this);
+        }
+        public RayBaseState SwingFinisher()
+        {
+            return new RaySwingFinisherState(_context, this);
         }
     }
 }

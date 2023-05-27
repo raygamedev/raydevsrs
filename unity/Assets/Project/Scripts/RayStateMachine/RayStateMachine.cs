@@ -8,6 +8,7 @@ namespace Raydevs.RayStateMachine
         [SerializeField] public RayMovementManager MovementManager;
         [SerializeField] public RayCombatManager CombatManager;
         [SerializeField] public Animator RayAnimator;
+        [SerializeField] public bool HasSword = true;
         private RayBaseState _currentState;
         private RayStateFactory _states;
 
@@ -30,40 +31,3 @@ namespace Raydevs.RayStateMachine
     }
 }
 
-        // public void OnAttackEnd()
-        // {
-        //     IsAttackAnimEnded = true;
-        // }
-        // private void OnLightAttackHandler(InputAction.CallbackContext ctx)
-        // {
-        //     IsLightAttackPerformed = ctx.ReadValueAsButton();
-        //     if (IsLightAttackPerformed)
-        //     { 
-        //         StartOrResetTimer();
-        //         if(AttackCounter < 2)
-        //             AttackCounter += 1;
-        //         else if(HasSword && AttackCounter < 3)
-        //             AttackCounter += 1;
-        //     }
-        //     Debug.Log($"Attack timer ended: {IsAttackTimerEnded}");
-        //     Debug.Log($"Attack counter: {AttackCounter}");
-        // }
-        // void StartOrResetTimer()
-        // {
-        //     // If timer already started, stop the previous one
-        //     if (_attackTimerCoroutine != null)
-        //     {
-        //         StopCoroutine(_attackTimerCoroutine);
-        //     }
-        //
-        //     _attackTimerCoroutine = StartCoroutine(AttackCooldownTimer());
-        // }
-        //
-        //
-        // private IEnumerator AttackCooldownTimer()
-        // {
-        //     IsAttackTimerEnded = false;
-        //     yield return new WaitForSeconds(AttackTimer);
-        //     IsAttackTimerEnded = true;
-        //     AttackCounter = 0;
-        // }

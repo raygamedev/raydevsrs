@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -125,7 +127,7 @@ TextureImporter:
         width: 336
         height: 288
       alignment: 9
-      pivot: {x: 0.4777254, y: 0.44955456}
+      pivot: {x: 0.5, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +148,7 @@ TextureImporter:
         width: 336
         height: 288
       alignment: 9
-      pivot: {x: 0.49606913, y: 0.44802582}
+      pivot: {x: 0.5, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +169,7 @@ TextureImporter:
         width: 336
         height: 288
       alignment: 9
-      pivot: {x: 0.4895174, y: 0.44496855}
+      pivot: {x: 0.5, y: 0.46}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,12 +192,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      l_punch_0: -573720456
       l_punch_1: 1327548287
       l_punch_2: 1083762313
-      l_punch_0: -573720456
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
