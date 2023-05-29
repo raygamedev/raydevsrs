@@ -27,17 +27,18 @@ namespace Raydevs.RayStateMachine
 
         public override void CheckSwitchState()
         {
-            if(ctx.MovementManager.IsGrounded)
+            if (ctx.CombatManager.IsSudoAttackPerformed)
+                SwitchState(state.AirborneSudoAttack());
+            else if(ctx.MovementManager.IsGrounded)
                 SwitchState(state.Grounded());
         }
         
         private void HandleAboutToLand()
         {
-            if (ctx.MovementManager.IsAboutToHitGround && !_aboutToLandAnimPlayed)
-            {
-                _aboutToLandAnimPlayed = true;
-                ctx.RayAnimator.Play("jumpAboutToLand");
-            }
+            if (!ctx.MovementManager.IsAboutToHitGround || _aboutToLandAnimPlayed) return;
+            
+            _aboutToLandAnimPlayed = true;
+            ctx.RayAnimator.Play("jumpAboutToLand");
         }
     }
 }

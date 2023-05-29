@@ -4,8 +4,13 @@ namespace Raydevs
     using UnityEngine;
     public class BulletinBoard : Interactable
     {
+        private BulletinBoard()
+        {
+            HasMessageBox = true;
+        }
+        
         [SerializeField] private bool _hasNewQuest = true;
-
+        
         private GameObject _questionMark;
         private GameObject _msgBox;
 

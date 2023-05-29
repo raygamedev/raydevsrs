@@ -15,11 +15,16 @@ namespace Project.Scripts.RayStateMachine
         
         private Coroutine _attackTimerCoroutine;
         private Coroutine _battleStanceTimerCoroutine;
+
+        public bool HasSword { get; set; }
+        public bool HasSudoHammer { get; set; }
+        public bool HasReactThrowable { get; set; }
         
-        public bool shouldEnterCombatState;
-        public bool IsAnimationEnded { get; set; }
         public bool IsLightAttackPerformed { get; set; }
         public bool IsSudoAttackPerformed { get; set; }
+        public bool IsReactAttackPerformed { get; set; }
+        public bool shouldEnterCombatState;
+        public bool IsAnimationEnded { get; set; }
 
         public bool IsInBattleStance { get; set; }
         public bool IsAttackTimerEnded { get; set; }
@@ -31,6 +36,7 @@ namespace Project.Scripts.RayStateMachine
         {
             InputManager.OnAttackPressed += OnLightAttack;
             InputManager.OnSudoAttackPressed += OnSudoAttack;
+            InputManager.OnReactAttackPressed += OnReactAttack;
         }
         
         private void OnLightAttack(InputAction.CallbackContext ctx)
@@ -47,8 +53,17 @@ namespace Project.Scripts.RayStateMachine
         }
         private void OnSudoAttack(InputAction.CallbackContext ctx)
         {
+            if(!HasSudoHammer) return;
             IsSudoAttackPerformed = ctx.ReadValueAsButton();
             if (!IsSudoAttackPerformed) return;
+            BattleStanceCooldownResetTimer();
+        }
+
+        private void OnReactAttack(InputAction.CallbackContext ctx)
+        {
+            if(!HasReactThrowable) return;
+            IsReactAttackPerformed = ctx.ReadValueAsButton();
+            if (!IsReactAttackPerformed) return;
             BattleStanceCooldownResetTimer();
         }
 
@@ -105,7 +120,7 @@ namespace Project.Scripts.RayStateMachine
 
         private void Update()
         {
-            shouldEnterCombatState = IsLightAttackPerformed || IsSudoAttackPerformed;
+            shouldEnterCombatState = IsLightAttackPerformed || IsSudoAttackPerformed || IsReactAttackPerformed;
             if(ComboFinished) PressCounter = 0;
         }
     }

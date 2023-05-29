@@ -5,7 +5,7 @@ namespace Project.Scripts.RayStateMachine
 {
     using UnityEngine;
     using UnityEngine.InputSystem;
-    public class RayInteractManager: MonoBehaviour
+    public class RayInteractManager: MonoBehaviour, ICollectable
     {
         [SerializeField] private GameObject _interactButton;
         private GameObject _existingInteractButton;
@@ -37,14 +37,21 @@ namespace Project.Scripts.RayStateMachine
                 return;
             }
             // Open msg box
-            OpenMsgBox();
+            InteractableHandler();
             
         }
-        private void OpenMsgBox()
+
+        private void InteractableHandler()
         {
-            _isMsgBoxOpen = true;
             Interactable _interactableScript = _interactable.GetComponent<Interactable>();
-            _interactableScript.Interact();
+            if(_interactableScript.IsCollectable)
+                _interactableScript.Interact(gameObject);
+            
+            else if (_interactableScript.HasMessageBox)
+            {
+                _isMsgBoxOpen = true;
+                _interactableScript.Interact();
+            }
             Destroy(_existingInteractButton);
         }
         
@@ -57,7 +64,6 @@ namespace Project.Scripts.RayStateMachine
         
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("Triggered");
             if (_existingInteractButton != null || !col.CompareTag(tag: $"Interactable")) return;
             _isInteractionAvailable = true;
             _interactable = col.gameObject;
@@ -79,6 +85,25 @@ namespace Project.Scripts.RayStateMachine
             Destroy(_existingInteractButton);
             _isInteractionAvailable = false;
         }
-        
+
+
+        public void SetCollectableInteracted(CollectableType collectable)
+        {
+            RayCombatManager rayCombatManager = GetComponent<RayCombatManager>();
+            switch (collectable)
+            {
+                case CollectableType.PythonSword:
+                    rayCombatManager.HasSword = true;
+                    return;
+                case CollectableType.SudoHammer:
+                    rayCombatManager.HasSudoHammer = true;
+                    return;
+                case CollectableType.ReactThrowingStar:
+                    rayCombatManager.HasReactThrowable = true;
+                    return;
+                default:
+                    return;
+            }
+        }
     }
 }

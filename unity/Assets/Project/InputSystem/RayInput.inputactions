@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ReactAttack",
+                    "type": "Button",
+                    "id": "34b8db27-00d3-49ca-8865-5b90bc386ce2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -170,6 +179,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SudoAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfe64a73-97ad-4e86-ac7a-961cfcc86485",
+                    "path": "<Keyboard>/t",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReactAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

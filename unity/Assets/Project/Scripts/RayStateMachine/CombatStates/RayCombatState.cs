@@ -27,6 +27,8 @@ namespace Project.Scripts.RayStateMachine.CombatStates
             Debug.Log("ComboFinished: " + ctx.CombatManager.ComboFinished);
              if (ctx.CombatManager.IsSudoAttackPerformed)
                 SwitchState(state.SudoAttack());
+             else if (ctx.CombatManager.IsReactAttackPerformed)
+                SwitchState(state.ReactAttack());
             else if(ctx.CombatManager.ComboFinished)
                 SwitchState(state.Grounded());
             else if(ctx.CombatManager.IsLightAttackPerformed)

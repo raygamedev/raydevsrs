@@ -8,7 +8,7 @@ namespace Raydevs.RayStateMachine
 
         public override void EnterState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
-            ctx.RayAnimator.Play(ctx.HasSword ? "BattleStance": "Idle");
+            ctx.RayAnimator.Play(ctx.CombatManager.HasSword ? "BattleStance": "Idle");
         }
 
         public override void UpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)

@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Project.Scripts.RayStateMachine
@@ -34,6 +33,12 @@ namespace Project.Scripts.RayStateMachine
         {
             add => _rayInput.RayControls.SudoAttack.performed += value;
             remove => _rayInput.RayControls.SudoAttack.performed -= value;
+        }
+        
+        public static event Action<InputAction.CallbackContext> OnReactAttackPressed
+        {
+            add => _rayInput.RayControls.ReactAttack.performed += value;
+            remove => _rayInput.RayControls.ReactAttack.performed -= value;
         }
 
         // Getting the value of the Move action

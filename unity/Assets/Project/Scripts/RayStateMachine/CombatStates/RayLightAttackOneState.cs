@@ -15,7 +15,7 @@ namespace Project.Scripts.RayStateMachine.CombatStates
             ctx.MovementManager.IsAbleToMove = false;
             _skipState = ctx.CombatManager.FollowUpAttack && !ctx.CombatManager.IsAttackTimerEnded;
             if (_skipState) return;
-            ctx.RayAnimator.Play(ctx.HasSword ? "LightAttack_1": "LeftPunch");
+            ctx.RayAnimator.Play(ctx.CombatManager.HasSword ? "LightAttack_1": "LeftPunch");
             
         }
 

@@ -31,6 +31,10 @@ namespace Raydevs.RayStateMachine
         {
             if (ctx.MovementManager.IsGrounded)
                 SwitchState(state.Grounded());
+            else if (ctx.CombatManager.IsSudoAttackPerformed)
+            {
+                SwitchState(state.AirborneSudoAttack());
+            }
             else if(ctx.MovementManager.IsFalling)
                 SwitchState(state.Fall());
         }

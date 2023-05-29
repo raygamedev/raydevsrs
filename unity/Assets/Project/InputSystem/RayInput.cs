@@ -71,6 +71,15 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReactAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""34b8db27-00d3-49ca-8865-5b90bc386ce2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
                     ""action"": ""SudoAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfe64a73-97ad-4e86-ac7a-961cfcc86485"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReactAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -207,6 +227,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
         m_RayControls_Interactable = m_RayControls.FindAction("Interactable", throwIfNotFound: true);
         m_RayControls_LightAttack = m_RayControls.FindAction("LightAttack", throwIfNotFound: true);
         m_RayControls_SudoAttack = m_RayControls.FindAction("SudoAttack", throwIfNotFound: true);
+        m_RayControls_ReactAttack = m_RayControls.FindAction("ReactAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_RayControls_Interactable;
     private readonly InputAction m_RayControls_LightAttack;
     private readonly InputAction m_RayControls_SudoAttack;
+    private readonly InputAction m_RayControls_ReactAttack;
     public struct RayControlsActions
     {
         private @RayInput m_Wrapper;
@@ -282,6 +304,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
         public InputAction @Interactable => m_Wrapper.m_RayControls_Interactable;
         public InputAction @LightAttack => m_Wrapper.m_RayControls_LightAttack;
         public InputAction @SudoAttack => m_Wrapper.m_RayControls_SudoAttack;
+        public InputAction @ReactAttack => m_Wrapper.m_RayControls_ReactAttack;
         public InputActionMap Get() { return m_Wrapper.m_RayControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +329,9 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
             @SudoAttack.started += instance.OnSudoAttack;
             @SudoAttack.performed += instance.OnSudoAttack;
             @SudoAttack.canceled += instance.OnSudoAttack;
+            @ReactAttack.started += instance.OnReactAttack;
+            @ReactAttack.performed += instance.OnReactAttack;
+            @ReactAttack.canceled += instance.OnReactAttack;
         }
 
         private void UnregisterCallbacks(IRayControlsActions instance)
@@ -325,6 +351,9 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
             @SudoAttack.started -= instance.OnSudoAttack;
             @SudoAttack.performed -= instance.OnSudoAttack;
             @SudoAttack.canceled -= instance.OnSudoAttack;
+            @ReactAttack.started -= instance.OnReactAttack;
+            @ReactAttack.performed -= instance.OnReactAttack;
+            @ReactAttack.canceled -= instance.OnReactAttack;
         }
 
         public void RemoveCallbacks(IRayControlsActions instance)
@@ -349,5 +378,6 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
         void OnInteractable(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnSudoAttack(InputAction.CallbackContext context);
+        void OnReactAttack(InputAction.CallbackContext context);
     }
 }

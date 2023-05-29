@@ -44,5 +44,8 @@ namespace Raydevs.RayStateMachine
             return new RayLightAttackTwoState(_context, this);
         }
         public RayBaseState SudoAttack() => new RaySudoAttackState(_context, this);
+        public RayBaseState AirborneSudoAttack() => new RayAirborneSudoAttack(_context, this);
+        
+        public RayBaseState ReactAttack() => new RayRangedAttackState(_context, this);
     }
 }
