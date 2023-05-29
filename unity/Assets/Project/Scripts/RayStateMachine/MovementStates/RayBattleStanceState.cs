@@ -22,7 +22,7 @@ namespace Raydevs.RayStateMachine
 
         public override void CheckSwitchState()
         {
-            if(ctx.CombatManager.IsLightAttackPerformed) 
+            if(ctx.CombatManager.shouldEnterCombatState) 
                 SwitchState(state.Combat());
             else if (ctx.MovementManager.IsRunning)
                 SwitchState(state.Run());

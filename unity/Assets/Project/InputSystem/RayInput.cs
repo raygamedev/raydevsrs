@@ -64,7 +64,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HeavyAttack"",
+                    ""name"": ""SudoAttack"",
                     ""type"": ""Button"",
                     ""id"": ""eb6ec1e5-9c53-4297-a03f-c602574e6a5d"",
                     ""expectedControlType"": ""Button"",
@@ -191,7 +191,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""SudoAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -206,7 +206,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
         m_RayControls_Jump = m_RayControls.FindAction("Jump", throwIfNotFound: true);
         m_RayControls_Interactable = m_RayControls.FindAction("Interactable", throwIfNotFound: true);
         m_RayControls_LightAttack = m_RayControls.FindAction("LightAttack", throwIfNotFound: true);
-        m_RayControls_HeavyAttack = m_RayControls.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_RayControls_SudoAttack = m_RayControls.FindAction("SudoAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -272,7 +272,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_RayControls_Jump;
     private readonly InputAction m_RayControls_Interactable;
     private readonly InputAction m_RayControls_LightAttack;
-    private readonly InputAction m_RayControls_HeavyAttack;
+    private readonly InputAction m_RayControls_SudoAttack;
     public struct RayControlsActions
     {
         private @RayInput m_Wrapper;
@@ -281,7 +281,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_RayControls_Jump;
         public InputAction @Interactable => m_Wrapper.m_RayControls_Interactable;
         public InputAction @LightAttack => m_Wrapper.m_RayControls_LightAttack;
-        public InputAction @HeavyAttack => m_Wrapper.m_RayControls_HeavyAttack;
+        public InputAction @SudoAttack => m_Wrapper.m_RayControls_SudoAttack;
         public InputActionMap Get() { return m_Wrapper.m_RayControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -303,9 +303,9 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
             @LightAttack.started += instance.OnLightAttack;
             @LightAttack.performed += instance.OnLightAttack;
             @LightAttack.canceled += instance.OnLightAttack;
-            @HeavyAttack.started += instance.OnHeavyAttack;
-            @HeavyAttack.performed += instance.OnHeavyAttack;
-            @HeavyAttack.canceled += instance.OnHeavyAttack;
+            @SudoAttack.started += instance.OnSudoAttack;
+            @SudoAttack.performed += instance.OnSudoAttack;
+            @SudoAttack.canceled += instance.OnSudoAttack;
         }
 
         private void UnregisterCallbacks(IRayControlsActions instance)
@@ -322,9 +322,9 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
             @LightAttack.started -= instance.OnLightAttack;
             @LightAttack.performed -= instance.OnLightAttack;
             @LightAttack.canceled -= instance.OnLightAttack;
-            @HeavyAttack.started -= instance.OnHeavyAttack;
-            @HeavyAttack.performed -= instance.OnHeavyAttack;
-            @HeavyAttack.canceled -= instance.OnHeavyAttack;
+            @SudoAttack.started -= instance.OnSudoAttack;
+            @SudoAttack.performed -= instance.OnSudoAttack;
+            @SudoAttack.canceled -= instance.OnSudoAttack;
         }
 
         public void RemoveCallbacks(IRayControlsActions instance)
@@ -348,6 +348,6 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteractable(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
-        void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnSudoAttack(InputAction.CallbackContext context);
     }
 }

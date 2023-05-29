@@ -8,13 +8,19 @@ namespace Project.Scripts.RayStateMachine
     {
         
         [SerializeField] private Rigidbody2D _rigidbody;
-        private Coroutine _attackTimerCoroutine;
-        private Coroutine _battleStanceTimerCoroutine;
+        
+        private const float jumpForce = 1000f;
         private const float AttackTimer = 0.7f;
         private const float BattleStanceTimer = 5f;
-        public bool AnimEnded;
+        
+        private Coroutine _attackTimerCoroutine;
+        private Coroutine _battleStanceTimerCoroutine;
+        
+        public bool shouldEnterCombatState;
         public bool IsAnimationEnded { get; set; }
         public bool IsLightAttackPerformed { get; set; }
+        public bool IsSudoAttackPerformed { get; set; }
+
         public bool IsInBattleStance { get; set; }
         public bool IsAttackTimerEnded { get; set; }
         public bool FollowUpAttack { get; set; }
@@ -24,6 +30,7 @@ namespace Project.Scripts.RayStateMachine
         private void OnEnable()
         {
             InputManager.OnAttackPressed += OnLightAttack;
+            InputManager.OnSudoAttackPressed += OnSudoAttack;
         }
         
         private void OnLightAttack(InputAction.CallbackContext ctx)
@@ -41,6 +48,12 @@ namespace Project.Scripts.RayStateMachine
                 AttackCooldownResetTimer();
                 BattleStanceCooldownResetTimer();
             }
+        }
+        private void OnSudoAttack(InputAction.CallbackContext ctx)
+        {
+            IsSudoAttackPerformed = ctx.ReadValueAsButton();
+            Debug.Log(IsSudoAttackPerformed);
+            BattleStanceCooldownResetTimer();
         }
 
         public void OnAnimationEnd()
@@ -92,9 +105,16 @@ namespace Project.Scripts.RayStateMachine
             _rigidbody.AddForce(GetMoveDirection() * force, ForceMode2D.Impulse);
         }
 
+        public void OnSudoAttackMiniJumpFrameEvent(float force)
+        {
+            _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Force);
+        }
+
         private void Update()
         {
+            shouldEnterCombatState = IsLightAttackPerformed || IsSudoAttackPerformed;
             if(ComboFinished) PressCounter = 0;
+            
         }
     }
 }

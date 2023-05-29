@@ -33,25 +33,14 @@ namespace Raydevs.RayStateMachine
         {
             return new RayBattleStanceState(_context, this);
         }
-        public RayBaseState LeftPunch()
+        public RayBaseState LightAttackOne()
         {
-            return new RayLeftPunchState(_context, this);
+            return new RayLightAttackOneState(_context, this);
         }
-        public RayBaseState RightPunch()
+        public RayBaseState LightAttackTwo()
         {
-            return new RayRightPunchState(_context, this);
+            return new RayLightAttackTwoState(_context, this);
         }
-        public RayBaseState SwingStarter()
-        {
-            return new RaySwingStartState(_context, this);
-        }
-        public RayBaseState SwingContinuer()
-        {
-            return new RaySwingContinuerState(_context, this);
-        }
-        public RayBaseState SwingFinisher()
-        {
-            return new RaySwingFinisherState(_context, this);
-        }
+        public RayBaseState SudoAttack() => new RaySudoAttackState(_context, this);
     }
 }

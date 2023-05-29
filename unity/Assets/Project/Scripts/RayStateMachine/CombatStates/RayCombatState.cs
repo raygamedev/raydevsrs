@@ -24,10 +24,13 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void CheckSwitchState()
         {
-            if(ctx.CombatManager.ComboFinished)
+            Debug.Log("ComboFinished: " + ctx.CombatManager.ComboFinished);
+             if (ctx.CombatManager.IsSudoAttackPerformed)
+                SwitchState(state.SudoAttack());
+            else if(ctx.CombatManager.ComboFinished)
                 SwitchState(state.Grounded());
             else if(ctx.CombatManager.IsLightAttackPerformed)
-                SwitchState(state.LeftPunch());
+                SwitchState(state.LightAttackOne());
             else SwitchState(state.Grounded());
         }
     }

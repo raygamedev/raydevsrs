@@ -30,6 +30,12 @@ namespace Project.Scripts.RayStateMachine
             remove => _rayInput.RayControls.LightAttack.performed -= value;
         }
         
+        public static event Action<InputAction.CallbackContext> OnSudoAttackPressed
+        {
+            add => _rayInput.RayControls.SudoAttack.performed += value;
+            remove => _rayInput.RayControls.SudoAttack.performed -= value;
+        }
+        
         // Getting the value of the Move action
         public static event Action<InputAction.CallbackContext> OnMove
         {

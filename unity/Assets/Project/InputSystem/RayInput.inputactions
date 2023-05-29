@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HeavyAttack",
+                    "name": "SudoAttack",
                     "type": "Button",
                     "id": "eb6ec1e5-9c53-4297-a03f-c602574e6a5d",
                     "expectedControlType": "Button",
@@ -169,7 +169,7 @@
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
-                    "action": "HeavyAttack",
+                    "action": "SudoAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
