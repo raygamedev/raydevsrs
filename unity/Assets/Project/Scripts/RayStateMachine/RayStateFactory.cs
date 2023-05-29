@@ -19,6 +19,8 @@ namespace Raydevs.RayStateMachine
             return new RayJumpState(_context, this);
         }
 
+        public RayBaseState Fall() => new RayFallState(_context, this);
+
         public RayBaseState Idle()
         {
             return new RayIdleState(_context, this);  

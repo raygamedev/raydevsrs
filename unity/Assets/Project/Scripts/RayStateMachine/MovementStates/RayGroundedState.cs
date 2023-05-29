@@ -25,10 +25,12 @@ namespace Raydevs.RayStateMachine
         {
             if(ctx.CombatManager.shouldEnterCombatState)
                 SwitchState(state.Combat());
-            else if(ctx.MovementManager.IsRunning)
-                SwitchState(state.Run());
             else if (ctx.MovementManager.IsJumpPerformed)
                 SwitchState(state.Jump());
+            else if (ctx.MovementManager.IsFalling)
+                SwitchState(state.Fall());
+            else if(ctx.MovementManager.IsRunning)
+                SwitchState(state.Run());
             else if(ctx.CombatManager.IsInBattleStance)
                 SwitchState(state.BattleStance());
             else SwitchState(state.Idle());

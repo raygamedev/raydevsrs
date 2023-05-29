@@ -28,6 +28,8 @@ namespace Raydevs.RayStateMachine
                 SwitchState(state.Run());
             else if (ctx.MovementManager.IsJumpPerformed)
                 SwitchState(state.Jump());
+            else if (ctx.MovementManager.IsFalling)
+                SwitchState(state.Fall());
         }
     }
 }

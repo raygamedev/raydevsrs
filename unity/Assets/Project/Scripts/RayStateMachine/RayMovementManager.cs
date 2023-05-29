@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,6 @@ namespace Project.Scripts.RayStateMachine
     {
         [SerializeField] private Rigidbody2D _rigidbody;
         public bool IsGrounded { get; set; }
-        public bool IsAirborne => !IsGrounded;
         public bool IsAbleToMove { get; set; }
         public bool IsJumpPerformed { get; set; }
         public float MoveDir { get; set; }
@@ -28,7 +26,7 @@ namespace Project.Scripts.RayStateMachine
         {
             get
             {
-                const float raycastDistance = 0.5f;
+                const float raycastDistance = 1.5f;
                 Vector2 ray = new Vector2(transform.position.x, transform.position.y - 0.5f);
                 RaycastHit2D hit = Physics2D.Raycast(ray,
                     Vector2.down,
@@ -39,7 +37,11 @@ namespace Project.Scripts.RayStateMachine
             }
         }
         private void OnMove(InputAction.CallbackContext ctx) => MoveDir = ctx.ReadValue<float>();
-        private void OnJump(InputAction.CallbackContext ctx) => IsJumpPerformed = ctx.ReadValueAsButton();
+
+        private void OnJump(InputAction.CallbackContext ctx)
+        {
+            IsJumpPerformed = ctx.ReadValueAsButton();
+        } 
 
         private void Update()
         {

@@ -4,9 +4,7 @@ namespace Raydevs.RayStateMachine
 {
     public class RayJumpState : RayBaseState
     {
-        
-        private static readonly int JumpState = Animator.StringToHash("jumpState");
-        public static readonly int Jump = Animator.StringToHash("Jump");
+        private bool _isAirborneAnimationPlayed;
         public RayJumpState(RayStateMachine currentContext, RayStateFactory stateFactory) 
             : base(currentContext, stateFactory) {}
 
@@ -18,6 +16,11 @@ namespace Raydevs.RayStateMachine
         public override void UpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
             CheckSwitchState();
+            if(_isAirborneAnimationPlayed) return;
+            AnimatorStateInfo animState = ctx.RayAnimator.GetCurrentAnimatorStateInfo(0);
+            if (!animState.IsName("jumpStart") || !(animState.normalizedTime > 1f)) return;
+            _isAirborneAnimationPlayed = true;
+            ctx.RayAnimator.Play("jumpAirborne");
         }
 
         public override void ExitState(RayStateMachine currentContext, RayStateFactory stateFactory)
@@ -28,6 +31,8 @@ namespace Raydevs.RayStateMachine
         {
             if (ctx.MovementManager.IsGrounded)
                 SwitchState(state.Grounded());
+            else if(ctx.MovementManager.IsFalling)
+                SwitchState(state.Fall());
         }
         
         private void HandleJump()
@@ -36,10 +41,11 @@ namespace Raydevs.RayStateMachine
             //     ctx.RayAnimator.SetFloat(JumpState, 3);
             // else if (ctx.MovementManager.IsAboutToHitGround)
             //     ctx.RayAnimator.SetFloat(JumpState, ctx.MovementManager ? 2 : 1);
-            if (ctx.MovementManager.IsAirborne == false)
+            if (ctx.MovementManager.IsGrounded)
             {
                 ctx.MovementManager.IsGrounded = false;
                 ctx.MovementManager.Rigidbody.AddForce(Vector2.up * 2000, ForceMode2D.Force);
+                ctx.RayAnimator.Play("jumpStart");
             }
             // ctx.RayAnimator.SetBool(Jump, true);
             

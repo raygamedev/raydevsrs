@@ -7,6 +7,7 @@ namespace Raydevs.RayStateMachine
     {
         [SerializeField] public RayMovementManager MovementManager;
         [SerializeField] public RayCombatManager CombatManager;
+        [SerializeField] public RayInteractManager InteractManager;
         [SerializeField] public Animator RayAnimator;
         [SerializeField] public bool HasSword = true;
         private RayBaseState _currentState;

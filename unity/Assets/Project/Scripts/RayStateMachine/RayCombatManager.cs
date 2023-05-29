@@ -36,30 +36,23 @@ namespace Project.Scripts.RayStateMachine
         private void OnLightAttack(InputAction.CallbackContext ctx)
         {
             IsLightAttackPerformed = ctx.ReadValueAsButton();
-            if(IsLightAttackPerformed)
-            {
-                PressCounter++;
-                if (ComboFinished) ComboFinished = false;
-                if (!IsAttackTimerEnded && !FollowUpAttack && PressCounter > 1)
-                {
-                    Debug.Log("Follow up attack");
-                    FollowUpAttack = true;
-                }
-                AttackCooldownResetTimer();
-                BattleStanceCooldownResetTimer();
-            }
+            if (!IsLightAttackPerformed) return;
+            
+            PressCounter++;
+            if (ComboFinished) ComboFinished = false;
+            if (!IsAttackTimerEnded && !FollowUpAttack && PressCounter > 1)
+                FollowUpAttack = true;
+            AttackCooldownResetTimer();
+            BattleStanceCooldownResetTimer();
         }
         private void OnSudoAttack(InputAction.CallbackContext ctx)
         {
             IsSudoAttackPerformed = ctx.ReadValueAsButton();
-            Debug.Log(IsSudoAttackPerformed);
+            if (!IsSudoAttackPerformed) return;
             BattleStanceCooldownResetTimer();
         }
 
-        public void OnAnimationEnd()
-        {
-            IsAnimationEnded = true;
-        }
+        public void OnAnimationEnd() => IsAnimationEnded = true;
         
         private void AttackCooldownResetTimer()
         {
@@ -114,7 +107,6 @@ namespace Project.Scripts.RayStateMachine
         {
             shouldEnterCombatState = IsLightAttackPerformed || IsSudoAttackPerformed;
             if(ComboFinished) PressCounter = 0;
-            
         }
     }
 }

@@ -31,10 +31,10 @@ namespace Raydevs.RayStateMachine
             {
                 SwitchState(state.Combat());
             }
-            if (ctx.MovementManager.IsJumpPerformed)
-            {
-                SwitchState(state.Jump());
-            }
+            else if (ctx.MovementManager.IsJumpPerformed)
+                    SwitchState(state.Jump());
+            else if (ctx.MovementManager.IsFalling)
+                SwitchState(state.Fall());
             else if (!ctx.MovementManager.IsRunning)
             {
                 SwitchState(state.Grounded());

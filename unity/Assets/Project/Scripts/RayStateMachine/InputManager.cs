@@ -29,21 +29,27 @@ namespace Project.Scripts.RayStateMachine
             add => _rayInput.RayControls.LightAttack.performed += value;
             remove => _rayInput.RayControls.LightAttack.performed -= value;
         }
-        
+
         public static event Action<InputAction.CallbackContext> OnSudoAttackPressed
         {
             add => _rayInput.RayControls.SudoAttack.performed += value;
             remove => _rayInput.RayControls.SudoAttack.performed -= value;
         }
-        
+
         // Getting the value of the Move action
         public static event Action<InputAction.CallbackContext> OnMove
         {
             add => _rayInput.RayControls.Movement.performed += value;
             remove => _rayInput.RayControls.Movement.performed -= value;
         }
+
+        public static event Action<InputAction.CallbackContext> OnInteractPressed
+        {
+            add => _rayInput.RayControls.Interactable.performed += value;
+            remove => _rayInput.RayControls.Interactable.performed -= value;
+        }
     }
-}
+} 
 
 //         private void OnEnable()
 //         {
