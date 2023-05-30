@@ -1,6 +1,7 @@
 namespace Raydevs
 {
     using UnityEngine;
+
     public class GravitateEffect : MonoBehaviour
     {
         private Rigidbody2D _rigidbody;

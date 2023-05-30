@@ -3,6 +3,7 @@ using Project.Scripts.RayStateMachine;
 namespace Raydevs.RayStateMachine
 {
     using UnityEngine;
+
     public class RayStateMachine : MonoBehaviour
     {
         [SerializeField] public RayMovementManager MovementManager;
@@ -30,4 +31,3 @@ namespace Raydevs.RayStateMachine
         }
     }
 }
-

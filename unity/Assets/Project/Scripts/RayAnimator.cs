@@ -3,7 +3,8 @@ using System;
 namespace Raydevs
 {
     using UnityEngine;
-    public class RayAnimator: MonoBehaviour
+
+    public class RayAnimator : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
 

@@ -5,8 +5,11 @@ namespace Raydevs.RayStateMachine
     public class RayJumpState : RayBaseState
     {
         private bool _isAirborneAnimationPlayed;
-        public RayJumpState(RayStateMachine currentContext, RayStateFactory stateFactory) 
-            : base(currentContext, stateFactory) {}
+
+        public RayJumpState(RayStateMachine currentContext, RayStateFactory stateFactory)
+            : base(currentContext, stateFactory)
+        {
+        }
 
         public override void EnterState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
@@ -16,7 +19,7 @@ namespace Raydevs.RayStateMachine
         public override void UpdateState(RayStateMachine currentContext, RayStateFactory stateFactory)
         {
             CheckSwitchState();
-            if(_isAirborneAnimationPlayed) return;
+            if (_isAirborneAnimationPlayed) return;
             AnimatorStateInfo animState = ctx.RayAnimator.GetCurrentAnimatorStateInfo(0);
             if (!animState.IsName("jumpStart") || !(animState.normalizedTime > 1f)) return;
             _isAirborneAnimationPlayed = true;
@@ -35,10 +38,10 @@ namespace Raydevs.RayStateMachine
             {
                 SwitchState(state.AirborneSudoAttack());
             }
-            else if(ctx.MovementManager.IsFalling)
+            else if (ctx.MovementManager.IsFalling)
                 SwitchState(state.Fall());
         }
-        
+
         private void HandleJump()
         {
             // if (ctx.MovementManager.IsAboutToHitGround && ctx.MovementManager.IsFalling)
@@ -52,7 +55,6 @@ namespace Raydevs.RayStateMachine
                 ctx.RayAnimator.Play("jumpStart");
             }
             // ctx.RayAnimator.SetBool(Jump, true);
-            
         }
     }
 }

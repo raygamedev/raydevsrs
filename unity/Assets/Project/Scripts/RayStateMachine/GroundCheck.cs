@@ -3,6 +3,7 @@ using Project.Scripts.RayStateMachine;
 namespace Raydevs
 {
     using UnityEngine;
+
     public class GroundCheck : MonoBehaviour
     {
         private RayMovementManager _rayMovementManager;

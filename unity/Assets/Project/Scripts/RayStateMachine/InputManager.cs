@@ -34,7 +34,7 @@ namespace Project.Scripts.RayStateMachine
             add => _rayInput.RayControls.SudoAttack.performed += value;
             remove => _rayInput.RayControls.SudoAttack.performed -= value;
         }
-        
+
         public static event Action<InputAction.CallbackContext> OnReactAttackPressed
         {
             add => _rayInput.RayControls.ReactAttack.performed += value;
@@ -54,20 +54,4 @@ namespace Project.Scripts.RayStateMachine
             remove => _rayInput.RayControls.Interactable.performed -= value;
         }
     }
-} 
-
-//         private void OnEnable()
-//         {
-//             _rayInput = new RayInput();
-//             _rayInput.RayControls.Enable();
-//             _rayInput.RayControls.Interactable.performed += OnInteract;
-//             _rayInput.RayControls.Movement.performed += OnMove;
-//             _rayInput.RayControls.Jump.performed += OnJump;
-//         }
-//
-//         protected virtual void OnInteract(InputAction.CallbackContext ctx){}
-//         protected virtual void OnMove(InputAction.CallbackContext ctx){}
-//         protected virtual void OnJump(InputAction.CallbackContext ctx){}
-//         protected virtual void OnDisable() => _rayInput.Disable();
-//     }
-// }
+}

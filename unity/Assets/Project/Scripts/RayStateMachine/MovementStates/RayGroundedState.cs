@@ -1,6 +1,6 @@
 namespace Raydevs.RayStateMachine
 {
-    public class RayGroundedState: RayBaseState
+    public class RayGroundedState : RayBaseState
     {
         public RayGroundedState(RayStateMachine currentContext, RayStateFactory stateFactory)
             : base(currentContext, stateFactory)
@@ -23,15 +23,15 @@ namespace Raydevs.RayStateMachine
 
         public override void CheckSwitchState()
         {
-            if(ctx.CombatManager.shouldEnterCombatState)
+            if (ctx.CombatManager.shouldEnterCombatState)
                 SwitchState(state.Combat());
             else if (ctx.MovementManager.IsJumpPerformed)
                 SwitchState(state.Jump());
             else if (ctx.MovementManager.IsFalling)
                 SwitchState(state.Fall());
-            else if(ctx.MovementManager.IsRunning)
+            else if (ctx.MovementManager.IsRunning)
                 SwitchState(state.Run());
-            else if(ctx.CombatManager.IsInBattleStance)
+            else if (ctx.CombatManager.IsInBattleStance)
                 SwitchState(state.BattleStance());
             else SwitchState(state.Idle());
         }

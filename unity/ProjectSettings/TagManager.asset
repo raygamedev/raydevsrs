@@ -7,15 +7,16 @@ TagManager:
   - GroundCheck
   - Ground
   - Interactable
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ray
   - Water
   - UI
   - Ground
-  - 
+  - Wall
   - 
   - 
   - 
