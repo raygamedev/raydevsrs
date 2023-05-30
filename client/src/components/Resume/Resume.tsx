@@ -163,10 +163,10 @@ export const Resume = ({ isPlaying, setIsGameLoaded }: ResumeProps) => {
   );
 
   const { unityProvider, isLoaded } = useUnityContext({
-    loaderUrl: 'build/build.loader.js',
-    dataUrl: 'build/build.data',
-    frameworkUrl: 'build/build.framework.js',
-    codeUrl: 'build/build.wasm',
+    loaderUrl: 'build/package.loader.js',
+    dataUrl: 'build/package.data',
+    frameworkUrl: 'build/package.framework.js',
+    codeUrl: 'build/package.wasm',
   });
 
   useEffect(() => setIsGameLoaded(isLoaded), [setIsGameLoaded, isLoaded]);

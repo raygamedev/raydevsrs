@@ -16,13 +16,13 @@ RUN mkdir -p src && \
     cargo build --release && \
     rm -rf src
 COPY server/ ./
-RUN cargo build --release
+RUN cargo install --path .
 
 # Combine the React app and Rust server into the final image
 FROM debian:buster-slim
 RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY --from=react-build /app/build /app/build
-COPY --from=rust-build /app/target/release/server /app/server
+COPY --from=rust-build /usr/local/cargo/bin/server /app/server
 COPY server/assets /app/assets 
 
 WORKDIR /app
