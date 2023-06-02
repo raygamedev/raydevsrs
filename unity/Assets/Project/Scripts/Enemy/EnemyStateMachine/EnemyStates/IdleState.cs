@@ -28,9 +28,11 @@ namespace Raydevs.Enemy.EnemyStateMachine.EnemyStates
 
         public override void CheckSwitchState()
         {
-            if(ctx.RayDetectedCollider)
+            if(ctx.EnemyTookDamage)
+                SwitchState(state.TookDamage());
+            else if(ctx.RayDetectedCollider)
                 SwitchState(state.Follow());
-            if(!_isIdle)
+            else if(!_isIdle)
                 SwitchState(state.Patrol());
         }
         

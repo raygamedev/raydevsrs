@@ -18,7 +18,6 @@ namespace Raydevs.Enemy.EnemyStateMachine.EnemyStates
         public override void UpdateState(EnemyController currentContext, EnemyStateFactory stateFactory)
         {
             _isAnimFinished = ctx.AnimatorController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
-            Debug.Log(_isAnimFinished);
             CheckSwitchState();
         }
 
@@ -29,7 +28,9 @@ namespace Raydevs.Enemy.EnemyStateMachine.EnemyStates
 
         public override void CheckSwitchState()
         {
-            if(!ctx.IsInAttackRange && _isAnimFinished)
+            if(ctx.EnemyTookDamage)
+                SwitchState(state.TookDamage());
+            else if(!ctx.IsInAttackRange && _isAnimFinished)
                 SwitchState(state.Follow());
         }
     }

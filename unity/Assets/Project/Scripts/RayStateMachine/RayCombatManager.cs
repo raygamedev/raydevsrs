@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using Raydevs.Enemy.EnemyStateMachine;
+using Raydevs.VFX;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +11,14 @@ namespace Project.Scripts.RayStateMachine
     {
         
         [SerializeField] private Rigidbody2D _rigidbody;
-        
+        [SerializeField] public Transform SwordAttackPoint;
+        [SerializeField] public float SwordAttackRange;
+        [SerializeField] public Transform SudoAttackPoint;
+        [SerializeField] public LayerMask EnemyLayer;
+        [SerializeField] public int LightAttackDamage;
+        [SerializeField] private GameObject swordImpactVFX;
+        [SerializeField] private GameObject damageText;
+
         private const float jumpForce = 1000f;
         private const float AttackTimer = 0.7f;
         private const float BattleStanceTimer = 5f;
@@ -16,9 +26,9 @@ namespace Project.Scripts.RayStateMachine
         private Coroutine _attackTimerCoroutine;
         private Coroutine _battleStanceTimerCoroutine;
 
-        public bool HasSword { get; set; }
-        public bool HasSudoHammer { get; set; }
-        public bool HasReactThrowable { get; set; }
+        public bool HasSword { get; set; } = true;
+        public bool HasSudoHammer { get; set; } = true;
+        public bool HasReactThrowable { get; set; } = true;
         
         public bool IsLightAttackPerformed { get; set; }
         public bool IsSudoAttackPerformed { get; set; }
@@ -43,7 +53,7 @@ namespace Project.Scripts.RayStateMachine
         {
             IsLightAttackPerformed = ctx.ReadValueAsButton();
             if (!IsLightAttackPerformed) return;
-            
+
             PressCounter++;
             if (ComboFinished) ComboFinished = false;
             if (!IsAttackTimerEnded && !FollowUpAttack && PressCounter > 1)
@@ -92,7 +102,6 @@ namespace Project.Scripts.RayStateMachine
         {
             IsAttackTimerEnded = false;
             yield return new WaitForSeconds(AttackTimer);
-            Debug.Log("Attack timer ended");
             IsAttackTimerEnded = true;
             FollowUpAttack = false;
         }
@@ -122,6 +131,24 @@ namespace Project.Scripts.RayStateMachine
         {
             shouldEnterCombatState = IsLightAttackPerformed || IsSudoAttackPerformed || IsReactAttackPerformed;
             if(ComboFinished) PressCounter = 0;
+        }
+
+        public void SwordHitFrameEvent(int knockBackForce)
+        {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(SwordAttackPoint.position, SwordAttackRange, EnemyLayer);
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Instantiate(swordImpactVFX, enemy.transform.position, Quaternion.identity);
+                GameObject damageTextGameObject = Instantiate(damageText, enemy.transform.position, Quaternion.identity);
+                damageTextGameObject.GetComponent<DamageText>().SetDamageText(LightAttackDamage);
+                enemy.GetComponent<EnemyController>().TakeDamage(LightAttackDamage, knockBackForce, false);
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(SwordAttackPoint.position, SwordAttackRange);
         }
     }
 }

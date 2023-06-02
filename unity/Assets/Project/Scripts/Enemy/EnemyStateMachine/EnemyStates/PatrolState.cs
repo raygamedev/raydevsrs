@@ -38,7 +38,9 @@ namespace Raydevs.Enemy.EnemyStateMachine.EnemyStates
 
         public override void CheckSwitchState()
         {
-            if(_isFollowingPlayer)
+            if(ctx.EnemyTookDamage)
+                SwitchState(state.TookDamage());
+            else if(_isFollowingPlayer)
                 SwitchState(state.Follow());
             else if(_shouldRest)
                 SwitchState(state.Idle());

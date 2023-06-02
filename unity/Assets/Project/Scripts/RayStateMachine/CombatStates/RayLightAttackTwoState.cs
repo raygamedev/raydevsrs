@@ -22,6 +22,8 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void ExitState(Raydevs.RayStateMachine.RayStateMachine currentContext, RayStateFactory stateFactory)
         {
+            if(ctx.CombatManager.IsLightAttackPerformed)
+                ctx.CombatManager.IsLightAttackPerformed = false;
             ctx.CombatManager.ComboFinished = true;
             ctx.CombatManager.FollowUpAttack = false;
             ctx.CombatManager.IsAnimationEnded = false;

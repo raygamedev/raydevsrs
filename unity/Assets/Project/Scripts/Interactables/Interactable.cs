@@ -10,7 +10,6 @@ namespace Raydevs
         public bool HasMessageBox { get; set; }
         public virtual void Interact()
         {
-            Debug.Log($"Interacting with {gameObject.name}");
         }
 
         public virtual void Interact(GameObject ray)
@@ -19,7 +18,6 @@ namespace Raydevs
         }
         public virtual void OnInteractLeave()
         {
-            Debug.Log($"Leaving Interaction with {gameObject.name}");
         }
     }
 }

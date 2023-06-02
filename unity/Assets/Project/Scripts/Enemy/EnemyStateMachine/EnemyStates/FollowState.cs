@@ -14,7 +14,7 @@ namespace Raydevs.Enemy.EnemyStateMachine.EnemyStates
         public override void EnterState(EnemyController currentContext, EnemyStateFactory stateFactory)
         {
             ctx.IsRunning = true;
-            ctx.MoveSpeed = 200f;
+            ctx.MoveSpeed = 70f;
             ctx.AnimatorController.Play("Run");
             ctx.StartCoroutine(StopFollowingPlayer());
         }
@@ -31,7 +31,10 @@ namespace Raydevs.Enemy.EnemyStateMachine.EnemyStates
 
         public override void CheckSwitchState()
         {
-            if (ctx.IsInAttackRange)
+
+            if(ctx.EnemyTookDamage)
+                SwitchState(state.TookDamage());
+            else if (ctx.IsInAttackRange)
                 SwitchState(state.Attack());
             else if(!_isFollowingPlayer)
                 SwitchState(state.Patrol());

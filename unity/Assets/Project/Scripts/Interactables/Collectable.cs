@@ -12,7 +12,6 @@ namespace Raydevs
         public override void Interact(GameObject ray)
         {
             base.Interact();
-            Debug.Log("Collected: " + _collectableType);
             ICollectable collectable = ray.GetComponent<ICollectable>();
             if(collectable != null)
                 collectable.SetCollectableInteracted(_collectableType);

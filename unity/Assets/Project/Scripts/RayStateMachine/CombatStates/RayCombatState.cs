@@ -24,7 +24,6 @@ namespace Project.Scripts.RayStateMachine.CombatStates
 
         public override void CheckSwitchState()
         {
-            Debug.Log("ComboFinished: " + ctx.CombatManager.ComboFinished);
              if (ctx.CombatManager.IsSudoAttackPerformed)
                 SwitchState(state.SudoAttack());
              else if (ctx.CombatManager.IsReactAttackPerformed)

@@ -17,5 +17,6 @@ namespace Raydevs.Enemy.EnemyStateMachine
 
         public EnemyBaseState Idle() => new IdleState(_context, this);
         public EnemyBaseState Attack() => new AttackState(_context, this);
+        public EnemyBaseState TookDamage() => new TookDamageState(_context, this);
     }
 }

@@ -60,7 +60,7 @@ public partial class @RayInput: IInputActionCollection2, IDisposable
                     ""id"": ""2f0a2bfa-ff53-4f02-b030-967d5d439ee5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
