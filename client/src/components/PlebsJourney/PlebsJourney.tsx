@@ -13,10 +13,10 @@ const ResumeModal = styled.div`
 `;
 export const PlebsJourney = (): JSX.Element => {
   const { unityProvider } = useUnityContext({
-    loaderUrl: 'build/package.loader.js',
-    dataUrl: 'build/package.data',
-    frameworkUrl: 'build/package.framework.js',
-    codeUrl: 'build/package.wasm',
+    loaderUrl: 'build/test.loader.js',
+    dataUrl: 'build/test.data',
+    frameworkUrl: 'build/test.framework.js',
+    codeUrl: 'build/test.wasm',
   });
   return <div></div>;
 };

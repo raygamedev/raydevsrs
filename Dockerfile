@@ -1,15 +1,13 @@
-FROM rust:latest
+FROM node:18-alpine as builder
+WORKDIR /app
+COPY client/package.json client/package-lock.json ./
+RUN npm install
+COPY client /app
+RUN npm run build
 
-# Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs
-
-# Install wasm-pack for WebAssembly support in Rust
-RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh 
-
-RUN npm install -g typescript
-
-# Install Bevy dependencies
-RUN apt-get update && \
-    apt-get install -y libasound2-dev libudev-dev
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/build /app/build
+RUN npm install -g serve
+CMD serve -s -l 8080 build
 

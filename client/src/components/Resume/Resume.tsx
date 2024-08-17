@@ -89,7 +89,7 @@ const resumeData: ResumeData = {
   },
   [ResumeKeys.DataTeamMember]: {
     segmentItem: {
-      title: 'Data Team Member',
+      title: 'TESTEST',
       startDate: 'May 2018',
       endDate: 'April 2019',
       company: {
@@ -163,10 +163,10 @@ export const Resume = ({ isPlaying, setIsGameLoaded }: ResumeProps) => {
   );
 
   const { unityProvider, isLoaded } = useUnityContext({
-    loaderUrl: 'build/package.loader.js',
-    dataUrl: 'build/package.data',
-    frameworkUrl: 'build/package.framework.js',
-    codeUrl: 'build/package.wasm',
+    loaderUrl: 'build/test.loader.js',
+    dataUrl: 'build/test.data',
+    frameworkUrl: 'build/test.framework.js',
+    codeUrl: 'build/test.wasm',
   });
 
   useEffect(() => setIsGameLoaded(isLoaded), [setIsGameLoaded, isLoaded]);
