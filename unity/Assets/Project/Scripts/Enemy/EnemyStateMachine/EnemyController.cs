@@ -60,8 +60,8 @@ namespace Raydevs.Enemy.EnemyStateMachine
         private void FixedUpdate()
         {
             if (IsRunning && IsAbleToMove)
-                rigidbody.velocity =
-                    new Vector2(Direction * MoveSpeed * Time.deltaTime, rigidbody.velocity.y);
+                rigidbody.linearVelocity =
+                    new Vector2(Direction * MoveSpeed * Time.deltaTime, rigidbody.linearVelocity.y);
         }
 
         public void Flip()
@@ -92,7 +92,7 @@ namespace Raydevs.Enemy.EnemyStateMachine
         private IEnumerator EnemyStunnedCoroutine()
         {
             IsAbleToMove = false;
-            rigidbody.velocity = Vector2.zero;
+            rigidbody.linearVelocity = Vector2.zero;
             yield return new WaitForSeconds(enemyStunTime);
             IsAbleToMove = true;
         }

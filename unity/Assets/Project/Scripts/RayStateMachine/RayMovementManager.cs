@@ -20,7 +20,7 @@ namespace Project.Scripts.RayStateMachine
             InputManager.OnMove += OnMove;
         }
         
-        public bool IsFalling => _rigidbody.velocity.y < -0.1f;
+        public bool IsFalling => _rigidbody.linearVelocity.y < -0.1f;
         // TODO: Add falling state
         public bool IsAboutToHitGround
         {
@@ -52,7 +52,7 @@ namespace Project.Scripts.RayStateMachine
         private void FixedUpdate()
         {
             if(IsAbleToMove)
-                _rigidbody.velocity = new Vector2(MoveDir * 9f, _rigidbody.velocity.y);
+                _rigidbody.linearVelocity = new Vector2(MoveDir * 9f, _rigidbody.linearVelocity.y);
         }
 
         private void Flip()
