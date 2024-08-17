@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      replicate-prediction-7adqhhrjunhuljbjbcm54wjamy_0: -1900207248840181533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
